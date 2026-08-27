@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HebrewBooks PDF Viewer</title>
+<link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+
+<!-- Toolbar -->
+<div id="toolbar">
+  <div class="tb-group">
+    <button id="btnSidebar"        title="סרגל צד" data-en-title="Sidebar"       class="icon">☰</button>
+  </div>
+
+  <div class="tb-group">
+    <button id="btnPrev"           title="עמוד קודם" data-en-title="Previous page"     class="icon">▶</button>
+    <input  id="pageInput"         type="text" inputmode="numeric" value="1">
+    <span   class="dim" data-en-text="of">מתוך</span>
+    <span   id="pageCount">—</span>
+    <button id="btnNext"           title="עמוד הבא" data-en-title="Next page"      class="icon">◀</button>
+  </div>
+
+  <div class="tb-group">
+    <button id="btnZoomOut"        title="הקטן" data-en-title="Zoom out"          class="icon">−</button>
+    <select id="zoomSelect">
+      <option value="page-width" selected data-en-text="Page width">רוחב עמוד</option>
+      <option value="page-height" data-en-text="Page height">גובה עמוד</option>
+      <option value="page-fit" data-en-text="Fit page">התאם לעמוד</option>
+      <option value="auto" data-en-text="Automatic">אוטומטי</option>
+      <option value="0.5">50%</option>
+      <option value="0.75">75%</option>
+      <option value="1">100%</option>
+      <option value="1.25">125%</option>
+      <option value="1.5">150%</option>
+      <option value="2">200%</option>
+      <option value="3">300%</option>
+      <option value="4">400%</option>
+    </select>
+    <button id="btnZoomIn"         title="הגדל" data-en-title="Zoom in"          class="icon">+</button>
+  </div>
+
+  <div class="tb-group">
+    <button id="btnFind"           title="חיפוש (Ctrl+F)" data-en-title="Find (Ctrl+F)" class="icon">⌕</button>
+    <button id="btnCopy"           title="העתק נבחר (Ctrl+C)" data-en-title="Copy selection (Ctrl+C)" class="icon">⧉</button>
+    <button id="btnRotate"         title="סובב" data-en-title="Rotate"          class="icon">↻</button>
+    <button id="btnPrint"          title="הדפס (Ctrl+P)" data-en-title="Print (Ctrl+P)"  class="icon">⎙</button>
+  </div>
+
+  <div class="tb-spacer"></div>
+
+  <div id="docTitle" class="dim"></div>
+</div>
+
+<!-- Find bar -->
+<div id="findBar" class="hidden">
+  <input  id="findInput" type="text" placeholder="חפש בספר…" data-en-ph="Search the book…">
+  <button id="findPrev"  class="icon" title="הקודם" data-en-title="Previous">▶</button>
+  <button id="findNext"  class="icon" title="הבא" data-en-title="Next">◀</button>
+  <span   id="findStatus" class="dim"></span>
+  <label class="findOpt"><input id="findHighlightAll" type="checkbox" checked><span data-en-text="Highlight all">הדגש הכל</span></label>
+  <label class="findOpt"><input id="findCaseSensitive" type="checkbox"><span data-en-text="Case-sensitive">תלוי-רישיות</span></label>
+  <button id="btnFindClose" class="icon" title="סגור" data-en-title="Close">✕</button>
+</div>
+
+<!-- Body: sidebar + viewer -->
+<div id="body">
+  <aside id="sidebar" class="hidden">
+    <div id="sidebarTabs">
+      <button id="tabThumbs" class="tab active" data-en-text="Thumbnails">תמונות</button>
+      <button id="tabOutline" class="tab" data-en-text="Contents">תוכן עניינים</button>
+    </div>
+    <div id="thumbsPane"  class="pane active"></div>
+    <div id="outlinePane" class="pane">
+      <!-- Header bar with subtle action icons. The "+" appends an entry at the
+           current page; the pencil opens the full editor (WPF dialog). Both
+           communicate with the host via postMessage. -->
+      <div id="outlineActions">
+        <span id="outlineHeaderLabel" data-en-text="Contents">תוכן עניינים</span>
+        <button id="btnTocAdd"  class="outline-action" title="הוסף לעמוד הנוכחי" data-en-title="Add to current page">＋</button>
+        <button id="btnTocEdit" class="outline-action" title="ערוך תוכן עניינים" data-en-title="Edit table of contents">✎</button>
+      </div>
+      <div id="outlineList"></div>
+    </div>
+  </aside>
+
+  <main id="viewerContainer">
+    <div id="viewer"></div>
+
+    <div id="loadingOverlay" class="overlay hidden">
+      <div class="spinner"></div>
+      <div data-en-text="Loading…">טוען…</div>
+    </div>
+
+    <div id="errorOverlay" class="overlay hidden">
+      <div class="error-icon">⚠</div>
+      <div id="errorText"></div>
+    </div>
+  </main>
+
+  <!-- Compact page rail. Last child of #body so in RTL it sits on the visual
+       LEFT of the viewer. One row per page (number only — no thumbnails, fast on
+       multi-thousand-page books). Click jumps; the current page is highlighted
+       and kept in view as the document scrolls; pages viewed this session get a
+       dot. Built/reset per document by viewer.js (buildPageRail). -->
+  <nav id="pageRail" aria-label="ניווט עמודים" data-en-aria="Page navigation"></nav>
+</div>
+
+<!-- Custom right-click menu for the PDF area: copy / print / search-this-selection.
+     Hidden by default; viewer.js positions it at the cursor on contextmenu. -->
+<div id="ctxMenu" class="hidden">
+  <button id="ctxCopy"   data-action="copy" data-en-text="Copy">העתק</button>
+  <button id="ctxPrint"  data-action="print" data-en-text="Print">הדפס</button>
+  <button id="ctxFind"   data-action="find" data-en-text="Find">חפש</button>
+</div>
+
+<script>
+window.HB_setLang = function(lang){
+  if(lang!=='en') return;
+  var d=document;
+  d.documentElement.lang='en'; d.documentElement.dir='ltr';
+  d.querySelectorAll('[data-en-title]').forEach(function(e){ e.title=e.getAttribute('data-en-title'); });
+  d.querySelectorAll('[data-en-text]').forEach(function(e){ e.textContent=e.getAttribute('data-en-text'); });
+  d.querySelectorAll('[data-en-ph]').forEach(function(e){ e.setAttribute('placeholder', e.getAttribute('data-en-ph')); });
+  d.querySelectorAll('[data-en-aria]').forEach(function(e){ e.setAttribute('aria-label', e.getAttribute('data-en-aria')); });
+};
+</script>
+<script type="module" src="viewer.js"></script>
+</body>
+</html>

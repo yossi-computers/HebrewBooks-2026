@@ -1,0 +1,428 @@
+/* HebrewBooks text-book viewer.
+   Companion to viewer.css — shares the toolbar/sidebar/find-bar look so
+   switching between PDF and Text modes feels like one app, not two. */
+
+:root {
+  /* Toolbar palette. The defaults below are a "neutral dark" used when the
+     host hasn't told us which theme to use yet (rare — HB_setTheme fires
+     before the user sees anything). The hb-theme-* class blocks at the
+     bottom of this file override these per the 7 supported palettes. */
+  --tb-bg: #2b2b2b;
+  --tb-fg: #e6e6e6;
+  --tb-dim: #9a9a9a;
+  --tb-hover: #3d3d3d;
+  --tb-active: #555;
+  --tb-border: #1a1a1a;
+  --field-bg: #1f1f1f;
+  --field-border: #444;
+  --side-bg: #f5f5f5;
+  --side-fg: #222;
+  --side-dim: #666;
+  --side-border: #d0d0d0;
+  --side-hover: #dcdcdc;
+  --side-current-bg: #d6e6f5;
+  --side-current-fg: #000;
+  --accent: #5b9bd5;
+  --paper-bg: #fdfdfa;
+  --paper-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
+  --hl: rgba(255, 213, 0, 0.55);
+  --hl-cur: rgba(255, 102, 0, 0.7);
+  --tb-h: 38px;
+  --find-h: 38px;
+}
+
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Segoe UI", "Arial", sans-serif;
+  background: var(--tb-bg);
+  color: var(--tb-fg);
+}
+
+button {
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+input {
+  background: var(--field-bg);
+  color: var(--tb-fg);
+  border: 1px solid var(--field-border);
+  border-radius: 3px;
+  padding: 3px 6px;
+  font: inherit;
+}
+
+input:focus { outline: 1px solid var(--accent); }
+
+.hidden { display: none !important; }
+
+/* ----- Toolbar (identical look to viewer.css) ----- */
+
+#toolbar {
+  height: var(--tb-h);
+  background: var(--tb-bg);
+  border-bottom: 1px solid var(--tb-border);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 4px;
+  user-select: none;
+  flex-shrink: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+#toolbar::-webkit-scrollbar { display: none; }
+
+.tb-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 6px;
+  border-left: 1px solid var(--field-border);
+  flex-shrink: 0;
+}
+.tb-group:last-of-type { border-left: none; }
+.tb-group:first-of-type { border-right: none; padding-right: 0; }
+
+.tb-spacer { flex: 1; }
+
+.icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+}
+.icon:hover { background: var(--tb-hover); }
+.icon:active { background: var(--tb-active); }
+.icon[disabled] { opacity: 0.4; cursor: default; }
+.icon[disabled]:hover { background: transparent; }
+.icon.toggled { background: var(--tb-active); }
+
+.dim { color: var(--tb-dim); font-size: 12px; }
+
+#docTitle {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 360px;
+}
+
+/* ----- Find bar ----- */
+
+#findBar {
+  height: var(--find-h);
+  background: var(--field-bg);
+  border-bottom: 1px solid var(--tb-border);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 6px;
+  flex-shrink: 0;
+}
+#findInput { flex: 0 0 280px; max-width: 360px; }
+#findStatus { margin-right: 4px; }
+
+/* ----- Body ----- */
+
+#body {
+  display: flex;
+  height: calc(100% - var(--tb-h));
+  position: relative;
+}
+#findBar:not(.hidden) ~ #body {
+  height: calc(100% - var(--tb-h) - var(--find-h));
+}
+
+#sidebar {
+  width: 240px;
+  flex: 0 0 240px;
+  background: var(--side-bg);
+  color: #222;
+  border-left: 1px solid var(--side-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#sidebarHeader {
+  padding: 10px 12px;
+  font-weight: 600;
+  font-size: 13px;
+  background: #e8e8e8;
+  border-bottom: 1px solid var(--side-border);
+  flex-shrink: 0;
+}
+#tocList {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+  overflow-y: auto;
+  flex: 1;
+}
+/* The LI is just a container — padding/styling lives on the .toc-row inside
+   so nested .toc-children ULs aren't pushed by their parent's padding. */
+.toc-item {
+  font-size: 13px;
+  color: var(--side-fg);
+}
+.toc-row {
+  padding: 5px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.toc-row:hover { background: var(--side-hover); }
+.toc-item.current > .toc-row {
+  background: var(--side-current-bg);
+  color: var(--side-current-fg);
+  font-weight: 600;
+  border-right: 3px solid var(--accent);
+}
+
+/* Nested children list: reset browser defaults so our per-level
+   padding-inline-start on .toc-row controls all the indentation. */
+.toc-children {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.toc-item.toc-collapsed > .toc-children { display: none; }
+
+/* Expand/collapse toggle. Sits at the start of the row (right side in RTL).
+   .toc-toggle-spacer is the no-kids version — same width so leaf and
+   has-children rows align vertically. */
+.toc-toggle {
+  display: inline-block;
+  width: 12px;
+  flex: 0 0 12px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 10px;
+  color: #888;
+}
+.toc-toggle-spacer { cursor: default; }
+.toc-row:hover .toc-toggle { color: #000; }
+
+.toc-label {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Heading-level indentation. padding-inline-start is "right" in RTL, "left"
+   in LTR — works correctly without us hardcoding a direction. Each deeper
+   level adds 14px of inset; visual weight tapers off too so the eye reads
+   the structure top-down without getting overwhelmed by sub-sub-headings.
+   Otzraya books typically use levels 1-4; 5/6 included for completeness. */
+.toc-item.toc-level-1 > .toc-row { padding-inline-start: 14px; font-weight: 700; font-size: 14px; }
+.toc-item.toc-level-2 > .toc-row { padding-inline-start: 28px; font-weight: 600; }
+.toc-item.toc-level-3 > .toc-row { padding-inline-start: 42px; }
+.toc-item.toc-level-4 > .toc-row { padding-inline-start: 56px; font-size: 12px; color: var(--side-dim); }
+.toc-item.toc-level-5 > .toc-row { padding-inline-start: 70px; font-size: 12px; color: var(--side-dim); }
+.toc-item.toc-level-6 > .toc-row { padding-inline-start: 84px; font-size: 12px; color: var(--side-dim); }
+
+/* ----- Main content area ----- */
+
+#textContainer {
+  flex: 1;
+  overflow: auto;
+  background: #525659;
+  /* The chrome is RTL but selection works better when the container is RTL too —
+     unlike the PDF case where the canvas pinned us to LTR-with-RTL-textlayer. */
+  direction: rtl;
+  padding: 24px 0;
+}
+
+#textBody {
+  /* "Page" look — center, white-ish background, comfortable reading width. */
+  background: var(--paper-bg);
+  color: #1a1a1a;
+  margin: 0 auto;
+  max-width: 760px;
+  padding: 56px 64px;
+  box-shadow: var(--paper-shadow);
+  border-radius: 2px;
+  font-size: 18px;
+  line-height: 1.85;
+  font-family: "David", "Times New Roman", "Segoe UI", serif;
+  /* The text inside the .txt files is HTML with various inline tags. Letting the
+     browser handle the layout natively gives consistent justification & wrapping. */
+  word-spacing: 0.02em;
+}
+
+/* Heading styles inside the article — matches the source's <h1>/<h2>. */
+#textBody h1 {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 24px;
+  color: #2c2c2c;
+}
+#textBody h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 36px 0 12px;
+  padding-top: 10px;
+  border-top: 1px solid #dcdcdc;
+  color: #2c2c2c;
+  scroll-margin-top: 12px;
+}
+#textBody big { font-size: 1.05em; }
+#textBody strong { color: #1a1a1a; }
+#textBody small { font-size: 0.85em; color: #555; }
+
+/* Each heading-delimited siman is wrapped in <section class="hb-sec"> (see
+   wrapIntoSections in text-viewer.js). content-visibility:auto lets the browser
+   SKIP layout & paint of off-screen sections — on a 32MB work this turns an ~18s
+   first-paint into a fraction of a second. contain-intrinsic-size gives skipped
+   sections an estimated height so the scrollbar stays sane; `auto` remembers the
+   real size once a section has been rendered, so re-scrolling is stable. */
+#textBody .hb-sec {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 700px;
+}
+
+#textBody.zoom-applied {
+  /* When the user zooms via the toolbar we scale font-size; the line-height ratio
+     stays the same. JS sets the actual font-size; this class is just a marker for
+     debugging in the inspector. */
+}
+
+/* Highlights for terms passed in from a corpus search. */
+.hb-hit {
+  background: var(--hl);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+.hb-hit.current {
+  background: var(--hl-cur);
+  outline: 1px solid rgba(180, 90, 0, 0.7);
+}
+
+/* Find-bar matches use a distinct color so they don't visually fight with the
+   corpus-search highlights when both are active. */
+.hb-find {
+  background: rgba(80, 180, 255, 0.45);
+  border-radius: 2px;
+}
+.hb-find.current {
+  background: rgba(0, 120, 255, 0.7);
+  color: #fff;
+}
+
+/* ----- Loading / error overlays ----- */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(40, 42, 44, 0.92);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+}
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.error-icon { font-size: 32px; color: #ffb84d; }
+#errorText { font-size: 14px; text-align: center; max-width: 80%; }
+
+/* ----- Right-click menu (same shape as viewer.css) ----- */
+
+#ctxMenu {
+  position: fixed;
+  z-index: 100;
+  min-width: 140px;
+  background: var(--tb-bg);
+  color: var(--tb-fg);
+  border: 1px solid var(--tb-border);
+  border-radius: 4px;
+  padding: 4px 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  user-select: none;
+}
+#ctxMenu button {
+  display: block;
+  width: 100%;
+  text-align: right;
+  padding: 6px 14px;
+  font-size: 13px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+#ctxMenu button:hover { background: var(--tb-hover); }
+#ctxMenu button:disabled { opacity: 0.4; cursor: default; }
+#ctxMenu button:disabled:hover { background: transparent; }
+
+/* ----- Print stylesheet — strip the chrome, expand the page.
+   These rules apply BOTH under @media print AND when the JS host adds the
+   .hb-print-prepared class to <body>. The class is used by the C# print path
+   (PrintToPdfAsync), which in the pinned WebView2 build doesn't reliably honor
+   @media print — without forcing the layout to flow, the generated PDF would
+   only contain whatever's currently scrolled into view. ----- */
+@media print {
+  /* Root `html, body { height:100%; overflow:hidden }` (line 35) clips to viewport —
+     without undoing it here, the print pipeline only captures one page of content. */
+  html, body { height: auto !important; overflow: visible !important; }
+  #toolbar, #findBar, #sidebar, #ctxMenu, .overlay { display: none !important; }
+  #body { display: block !important; height: auto !important; }
+  #textContainer { overflow: visible !important; padding: 0 !important; background: #fff !important; height: auto !important; }
+  #textBody {
+    box-shadow: none !important; max-width: 100% !important; padding: 0 !important;
+    font-size: 14pt; line-height: 1.6;
+  }
+  /* Force ALL sections to render when printing — otherwise content-visibility:auto
+     would omit everything that wasn't scrolled into view. */
+  #textBody .hb-sec { content-visibility: visible !important; contain-intrinsic-size: auto !important; }
+  .hb-hit, .hb-find { background: transparent !important; }
+}
+/* Same rules under a regular class — the C# print path (PrintToPdfAsync) doesn't
+   reliably honor @media print in the pinned WebView2 build, so HB_preparePrint
+   toggles this class on <body> to force the flow layout out-of-band. */
+body.hb-print-prepared,
+html:has(body.hb-print-prepared) { height: auto !important; overflow: visible !important; }
+body.hb-print-prepared #toolbar,
+body.hb-print-prepared #findBar,
+body.hb-print-prepared #sidebar,
+body.hb-print-prepared #ctxMenu,
+body.hb-print-prepared .overlay { display: none !important; }
+body.hb-print-prepared #body { display: block !important; height: auto !important; }
+body.hb-print-prepared #textContainer {
+  overflow: visible !important; padding: 0 !important; background: #fff !important; height: auto !important;
+}
+body.hb-print-prepared #textBody {
+  box-shadow: none !important; max-width: 100% !important; padding: 0 !important;
+  font-size: 14pt; line-height: 1.6;
+}
+body.hb-print-prepared #textBody .hb-sec { content-visibility: visible !important; contain-intrinsic-size: auto !important; }
+body.hb-print-prepared .hb-hit, body.hb-print-prepared .hb-find { background: transparent !important; }

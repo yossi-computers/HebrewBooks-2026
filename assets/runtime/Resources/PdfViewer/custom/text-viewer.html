@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HebrewBooks Text Viewer</title>
+<link rel="stylesheet" href="text-viewer.css">
+</head>
+<body>
+
+<!-- Toolbar — mirrors viewer.html visually so the chrome looks consistent across modes. -->
+<div id="toolbar">
+  <div class="tb-group">
+    <button id="btnSidebar"  title="תוכן עניינים"   class="icon">☰</button>
+  </div>
+
+  <div class="tb-group">
+    <button id="btnPrev"     title="עוגן קודם"      class="icon">▶</button>
+    <span   id="anchorPos"   class="dim">—</span>
+    <button id="btnNext"     title="עוגן הבא"       class="icon">◀</button>
+  </div>
+
+  <!-- Search-result navigation (shown only when the open book has corpus-search
+       hits). ▶ = previous result, ◀ = next (RTL), matching the anchor group. -->
+  <div class="tb-group" id="hitNav" style="display:none">
+    <button id="btnHitPrev"  title="תוצאה קודמת"    class="icon">▶</button>
+    <span   id="hitPos"      class="dim">—</span>
+    <button id="btnHitNext"  title="תוצאה הבאה"      class="icon">◀</button>
+  </div>
+
+  <div class="tb-group">
+    <button id="btnZoomOut"  title="הקטן"           class="icon">−</button>
+    <span   id="zoomLabel"   class="dim">100%</span>
+    <button id="btnZoomIn"   title="הגדל"           class="icon">+</button>
+  </div>
+
+  <div class="tb-group">
+    <button id="btnFind"     title="חיפוש (Ctrl+F)" class="icon">⌕</button>
+    <button id="btnCopy"     title="העתק (Ctrl+C)"  class="icon">⧉</button>
+    <button id="btnPrint"    title="הדפס (Ctrl+P)"  class="icon">⎙</button>
+  </div>
+
+  <div class="tb-spacer"></div>
+
+  <div id="docTitle" class="dim"></div>
+</div>
+
+<!-- Find bar (toggled from the toolbar) -->
+<div id="findBar" class="hidden">
+  <input  id="findInput" type="text" placeholder="חפש בספר…">
+  <button id="findPrev"  class="icon" title="הקודם">▶</button>
+  <button id="findNext"  class="icon" title="הבא">◀</button>
+  <span   id="findStatus" class="dim"></span>
+  <button id="btnFindClose" class="icon" title="סגור">✕</button>
+</div>
+
+<!-- Body: TOC sidebar + the rendered HTML. -->
+<div id="body">
+  <aside id="sidebar" class="hidden">
+    <div id="sidebarHeader">תוכן עניינים</div>
+    <ul id="tocList"></ul>
+  </aside>
+
+  <main id="textContainer">
+    <article id="textBody"></article>
+
+    <div id="loadingOverlay" class="overlay">
+      <div class="spinner"></div>
+      <div>טוען…</div>
+    </div>
+
+    <div id="errorOverlay" class="overlay hidden">
+      <div class="error-icon">⚠</div>
+      <div id="errorText"></div>
+    </div>
+  </main>
+</div>
+
+<!-- Right-click menu, same actions as the PDF viewer. -->
+<div id="ctxMenu" class="hidden">
+  <button id="ctxCopy"   data-action="copy">העתק</button>
+  <button id="ctxPrint"  data-action="print">הדפס</button>
+  <button id="ctxFind"   data-action="find">חפש</button>
+</div>
+
+<script type="module" src="text-viewer.js"></script>
+</body>
+</html>

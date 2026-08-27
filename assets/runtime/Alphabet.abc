@@ -1,0 +1,79 @@
+dtSearch Alphabet File
+
+[Letters] // Original letter, lower case, upper case, unaccented
+ 0 0 0 0
+ 1 1 1 1
+ 2 2 2 2
+ 3 3 3 3
+ 4 4 4 4
+ 5 5 5 5
+ 6 6 6 6
+ 7 7 7 7
+ 8 8 8 8
+ 9 9 9 9
+ B b B B
+ C c C C
+ D d D D
+ E e E E
+ F f F F
+ G g G G
+ H h H H
+ I i I I
+ J j J J
+ K k K K
+ L l L L
+ M m M M
+ N n N N
+ O o O O
+ P p P P
+ Q q Q Q
+ R r R R
+ S s S S
+ T t T T
+ U u U U
+ V v V V
+ W w W W
+ X x X X
+ Y y Y Y
+ Z z Z Z
+ _ _ _ _
+ a a A a
+ b b B b
+ c c C c
+ d d D d
+ e e E e
+ f f F f
+ g g G g
+ h h H h
+ i i I i
+ j j J j
+ k k K k
+ l l L l
+ m m M m
+ n n N n
+ o o O o
+ p p P p
+ q q Q q
+ r r r r
+ s s S s
+ t t t t
+ u u u u
+ v v v v
+ w w W w
+ x x x x
+ y y Y y
+ z z z z
+
+[Hyphens]
+ -
+
+[Spaces]
+ !#$&()*+,./:;<=>?@A[\5c]^`{|}~
+
+[Ignore]
+ "%'
+
+[End]
+HyphenOption = 3
+AutoBreakCjkWords = 0
+CJKRanges = 2e80-ac00 ac00-d7af f900-faff fe30-fe4f 
