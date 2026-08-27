@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window x:Class="HebrewBooks.UI.Views.SplashWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:res="clr-namespace:HebrewBooks.UI.Resources" xmlns:m="clr-namespace:HebrewBooks.UI.Markup" WindowStyle="None" ResizeMode="NoResize" ShowInTaskbar="True" Title="{x:Static res:SharedStrings.S491}" Icon="pack://application:,,,/Resources/HebrewBooks.ico" AllowsTransparency="True" Background="#00FFFFFF" WindowStartupLocation="CenterScreen" Width="480" Height="300" xmlns:views="clr-namespace:HebrewBooks.UI.Views" FlowDirection="{m:LangFlow}">
+  <Border CornerRadius="14" Background="#1B1B1F" BorderThickness="0" MouseLeftButtonDown="OnDragMove">
+    <UIElement.Effect>
+      <DropShadowEffect BlurRadius="28" ShadowDepth="0" Opacity="0.55" Color="#000000" />
+    </UIElement.Effect>
+    <Grid Margin="32">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <Image Grid.Row="0" Width="104" Height="104" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" Source="pack://application:,,,/Resources/HebrewBooks.ico" />
+      <TextBlock Grid.Row="1" Text="{x:Static res:SharedStrings.S491}" FontSize="20" FontWeight="SemiBold" Foreground="#FFFFFF" HorizontalAlignment="Center" Margin="0,16,0,0" />
+      <ProgressBar Grid.Row="2" IsIndeterminate="True" Height="4" Margin="0,22,0,0" Background="#2E2E33" BorderThickness="0" Foreground="#4C8DFF" />
+      <TextBlock Name="StatusText" Grid.Row="3" Text="{x:Static res:SharedStrings.S492}" FontSize="13" Foreground="#B8B8C0" HorizontalAlignment="Center" Margin="0,14,0,0" />
+    </Grid>
+  </Border>
+</Window>

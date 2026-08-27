@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>hbsearch</RootNamespace>
+    <AssemblyName>hbsearch</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HebrewBooks.Core\HebrewBooks.Core.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Data\HebrewBooks.Data.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Infrastructure\HebrewBooks.Infrastructure.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Search\HebrewBooks.Search.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Services\HebrewBooks.Services.csproj" />
+  </ItemGroup>
+</Project>

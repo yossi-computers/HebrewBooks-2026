@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="HebrewBooks.Diagnostics.Ui.DiagnosticsView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" FlowDirection="RightToLeft" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Background="{DynamicResource ApplicationBackgroundBrush}" xmlns:ui1="clr-namespace:HebrewBooks.Diagnostics.Ui;assembly=HebrewBooks.Diagnostics.Ui">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Grid Margin="16">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0" Margin="0,0,0,12">
+      <TextBlock Text="בדיקת תקינות המערכת" FontSize="22" FontWeight="Bold" />
+      <TextBlock Text="סריקה של ההגדרות, הקטלוג, האינדקס והקבצים — ותמונת מצב מלאה לפני שמשהו משתבש." Opacity="0.75" Margin="0,2,0,0" TextWrapping="Wrap" />
+      <StackPanel Orientation="Horizontal" Margin="0,12,0,0" Visibility="{Binding HasRun, Converter={StaticResource BoolToVis}}">
+        <Border CornerRadius="12" BorderThickness="1" Padding="10,3" Margin="0,0,8,0" BorderBrush="#2E7D32">
+          <TextBlock Foreground="#2E7D32" FontWeight="SemiBold">
+            <Run Text="תקין: " />
+            <Run Text="{Binding OkCount, Mode=OneWay}" />
+          </TextBlock>
+        </Border>
+        <Border CornerRadius="12" BorderThickness="1" Padding="10,3" Margin="0,0,8,0" BorderBrush="#F59E0B">
+          <TextBlock Foreground="#F59E0B" FontWeight="SemiBold">
+            <Run Text="אזהרות: " />
+            <Run Text="{Binding WarnCount, Mode=OneWay}" />
+          </TextBlock>
+        </Border>
+        <Border CornerRadius="12" BorderThickness="1" Padding="10,3" Margin="0,0,8,0" BorderBrush="#D32F2F">
+          <TextBlock Foreground="#D32F2F" FontWeight="SemiBold">
+            <Run Text="תקלות: " />
+            <Run Text="{Binding ErrorCount, Mode=OneWay}" />
+          </TextBlock>
+        </Border>
+        <Border CornerRadius="12" BorderThickness="1" Padding="10,3" BorderBrush="#556E7A">
+          <TextBlock Foreground="#556E7A" FontWeight="SemiBold">
+            <Run Text="מידע: " />
+            <Run Text="{Binding InfoCount, Mode=OneWay}" />
+          </TextBlock>
+        </Border>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal" Margin="0,12,0,0" VerticalAlignment="Center">
+        <ui:Button Content="הרץ בדיקה" Appearance="Primary" Margin="0,0,8,0" Command="{Binding RunCommand}" />
+        <ui:Button Content="העתק דוח" Margin="0,0,8,0" Command="{Binding CopyReportCommand}" IsEnabled="{Binding HasRun}" />
+        <ui:Button Content="שמור דוח…" Margin="0,0,12,0" Command="{Binding SaveReportCommand}" IsEnabled="{Binding HasRun}" />
+        <ui:ProgressRing IsIndeterminate="True" Width="24" Height="24" Visibility="{Binding IsRunning, Converter={StaticResource BoolToVis}}" />
+        <TextBlock VerticalAlignment="Center" Margin="8,0,0,0" Opacity="0.85" TextWrapping="Wrap" Text="{Binding StatusText}" />
+      </StackPanel>
+    </StackPanel>
+    <ScrollViewer Name="ResultsScroll" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" PreviewMouseWheel="OnResultsWheel">
+      <ItemsControl ItemsSource="{Binding Items}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <ui:Card Margin="0,0,0,8" Padding="14">
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="Auto" />
+                  <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Ellipse Grid.Column="0" Width="14" Height="14" VerticalAlignment="Top" Margin="0,4,0,0" Fill="{Binding AccentBrush}" />
+                <StackPanel Grid.Column="1" Margin="12,0,0,0">
+                  <TextBlock FontSize="15" FontWeight="SemiBold" TextWrapping="Wrap" Text="{Binding Title}" />
+                  <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                    <Border CornerRadius="8" BorderThickness="1" Padding="6,1" Margin="0,0,8,0" BorderBrush="{Binding AccentBrush}">
+                      <TextBlock FontSize="11" Text="{Binding SeverityLabel}" Foreground="{Binding AccentBrush}" />
+                    </Border>
+                    <TextBlock FontSize="12" Opacity="0.7" VerticalAlignment="Center" Text="{Binding Category}" />
+                  </StackPanel>
+                  <TextBlock TextWrapping="Wrap" Margin="0,8,0,0" Opacity="0.95" Text="{Binding Detail}" />
+                  <Expander Header="פרטים נוספים" Margin="0,8,0,0" Visibility="{Binding HasEvidence, Converter={StaticResource BoolToVis}}">
+                    <TextBox IsReadOnly="True" TextWrapping="Wrap" FontFamily="Consolas" FontSize="12" Background="#00FFFFFF" BorderThickness="0" MaxHeight="180" VerticalScrollBarVisibility="Auto" FlowDirection="LeftToRight" Margin="0,4,0,0" Text="{Binding Evidence, Mode=OneWay}" />
+                  </Expander>
+                  <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="{Binding HasFix, Converter={StaticResource BoolToVis}}">
+                    <ui:Button Content="{Binding FixLabel}" Command="{Binding ApplyFixCommand}" />
+                    <ui:ProgressRing IsIndeterminate="True" Width="18" Height="18" Margin="8,0,0,0" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVis}}" />
+                    <TextBlock VerticalAlignment="Center" Margin="8,0,0,0" TextWrapping="Wrap" Text="{Binding FixResultMessage}" Foreground="{Binding FixResultBrush}" Visibility="{Binding HasFixResult, Converter={StaticResource BoolToVis}}" />
+                  </StackPanel>
+                </StackPanel>
+              </Grid>
+            </ui:Card>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

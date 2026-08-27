@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ui:FluentWindow x:Class="HebrewBooks.UI.Views.TocQuickAddDialog" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:res="clr-namespace:HebrewBooks.UI.Resources" xmlns:m="clr-namespace:HebrewBooks.UI.Markup" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" Title="{x:Static res:SharedStrings.S504}" Icon="/Resources/HebrewBooks.ico" Width="420" Height="240" WindowStartupLocation="CenterOwner" ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica" ResizeMode="NoResize" xmlns:views="clr-namespace:HebrewBooks.UI.Views" FlowDirection="{m:LangFlow}">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <ui:TitleBar Grid.Row="0" Title="{x:Static res:SharedStrings.S504}">
+      <ui:TitleBar.Icon>
+        <ui:ImageIcon Source="/Resources/HebrewBooks.ico" />
+      </ui:TitleBar.Icon>
+    </ui:TitleBar>
+    <StackPanel Grid.Row="1" Margin="24,16,24,8" VerticalAlignment="Center">
+      <TextBlock Name="LabelText" FontSize="13" Margin="0,0,0,10" TextWrapping="Wrap" />
+      <ui:TextBox Name="TitleInput" PlaceholderText="{x:Static res:SharedStrings.S505}" FontSize="14" Padding="10" />
+    </StackPanel>
+    <Border Grid.Row="2" Background="{DynamicResource ControlFillColorTertiaryBrush}" Padding="16,12">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+        <ui:Button Content="{x:Static res:SharedStrings.S359}" MinWidth="90" Margin="0,0,8,0" Click="OnCancel" />
+        <ui:Button Name="OkButton" Content="{x:Static res:SharedStrings.S503}" Appearance="Primary" MinWidth="90" IsDefault="True" Click="OnOk" />
+      </StackPanel>
+    </Border>
+  </Grid>
+</ui:FluentWindow>

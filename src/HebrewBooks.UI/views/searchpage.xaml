@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="HebrewBooks.UI.Views.SearchPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="clr-namespace:HebrewBooks.UI.Markup" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:res="clr-namespace:HebrewBooks.UI.Resources" xmlns:ctl="clr-namespace:HebrewBooks.UI.Controls" xmlns:conv="clr-namespace:HebrewBooks.UI.Converters" xmlns:beh="clr-namespace:HebrewBooks.UI.Behaviors" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Title="SearchPage" xmlns:views="clr-namespace:HebrewBooks.UI.Views" FlowDirection="{m:LangFlow}">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <BooleanToVisibilityConverter x:Key="BoolToVis" />
+      <conv:StringNotEmptyToVisibility x:Key="StringNotEmptyToVisibility" />
+      <conv:SourceTypeLabelConverter x:Key="SourceTypeLabel" />
+      <conv:SourceTypeIconConverter x:Key="SourceTypeIcon" />
+      <conv:HebrewYearConverter x:Key="HebrewYear" />
+      <conv:ClampedScaleConverter x:Key="ClampedScale" />
+      <ctl:BindingProxy x:Key="VmProxy" Data="{Binding}" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <UIElement.InputBindings>
+    <KeyBinding Key="Escape" Command="{Binding CancelSearchCommand}" />
+  </UIElement.InputBindings>
+  <Grid Margin="16">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Name="ResultsCol" Width="*" MinWidth="320" />
+      <ColumnDefinition Name="SplitterCol" Width="6" />
+      <ColumnDefinition Name="PdfCol" Width="*" MinWidth="400" />
+    </Grid.ColumnDefinitions>
+    <ui:Card Name="SearchCard" Grid.Row="0" Grid.Column="0" Margin="0,0,0,12" Padding="12">
+      <StackPanel>
+        <Grid>
+          <FrameworkElement.Resources>
+            <ResourceDictionary>
+              <Style x:Key="{x:Type ToggleButton}" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+                <Style.Triggers>
+                  <Trigger Property="ToggleButton.IsChecked" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                    <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                  </Trigger>
+                </Style.Triggers>
+              </Style>
+            </ResourceDictionary>
+          </FrameworkElement.Resources>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+          <ui:Button Grid.Column="0" MinWidth="36" Padding="8,6" Margin="0,0,4,0" ToolTip="{x:Static res:SharedStrings.S243}" ToolTipService.ShowOnDisabled="True" Command="{Binding GoBackCommand}">
+            <ui:SymbolIcon Symbol="ChevronRight24" />
+          </ui:Button>
+          <ui:Button Grid.Column="1" MinWidth="36" Padding="8,6" Margin="0,0,8,0" ToolTip="{x:Static res:SharedStrings.S244}" ToolTipService.ShowOnDisabled="True" Command="{Binding GoForwardCommand}">
+            <ui:SymbolIcon Symbol="ChevronLeft24" />
+          </ui:Button>
+          <Border Grid.Column="2" CornerRadius="6" BorderThickness="1" Margin="0,0,12,0" BorderBrush="{DynamicResource ControlElevationBorderBrush}" Background="{DynamicResource ControlFillColorDefaultBrush}">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <ui:TextBox Name="QueryBox" Grid.Column="0" beh:SelectAllOnFocus.Enabled="True" PlaceholderText="{x:Static res:SharedStrings.S364}" FontSize="16" Padding="8,6" BorderThickness="0" Background="#00FFFFFF" Text="{Binding QueryText, UpdateSourceTrigger=PropertyChanged}">
+                <UIElement.InputBindings>
+                  <KeyBinding Key="Enter" Command="{Binding SearchCommand}" />
+                </UIElement.InputBindings>
+              </ui:TextBox>
+              <ui:Button Grid.Column="1" Appearance="Transparent" BorderThickness="0" Padding="8,4" Margin="0,1,1,1" ToolTip="{x:Static res:SharedStrings.ButtonSearch}" Command="{Binding SearchCommand}">
+                <ui:SymbolIcon Symbol="Search24" FontSize="18" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+              </ui:Button>
+            </Grid>
+          </Border>
+          <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
+            <Popup Placement="Bottom" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade" beh:PopupReopenGuard.Enabled="True" IsOpen="{Binding IsChecked, ElementName=AdvancedToggle, Mode=TwoWay}" PlacementTarget="{Binding ElementName=AdvancedToggle}">
+              <Border Background="{DynamicResource ApplicationBackgroundBrush}" BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" CornerRadius="6" Padding="14" MinWidth="320" FlowDirection="{m:LangFlow}">
+                <StackPanel>
+                  <TextBlock Text="{x:Static res:SharedStrings.S261}" FontWeight="SemiBold" Margin="0,0,0,8" />
+                  <CheckBox Content="{x:Static res:SharedStrings.OptionHybur}" Margin="0,2" ToolTip="{x:Static res:SharedStrings.S365}" IsChecked="{Binding Hybur}" />
+                  <CheckBox Content="{x:Static res:SharedStrings.OptionRootSearch}" Margin="0,2" ToolTip="{x:Static res:SharedStrings.S366}" IsChecked="{Binding RootSearch}" />
+                  <CheckBox Content="{x:Static res:SharedStrings.OptionRasheyTevot}" Margin="0,2" ToolTip="{x:Static res:SharedStrings.S367}" IsChecked="{Binding RasheyTevot}" />
+                  <CheckBox Content="{x:Static res:SharedStrings.S133}" Margin="0,2" ToolTip="{x:Static res:SharedStrings.S368}" IsChecked="{Binding ExpandNumberGender}" />
+                  <CheckBox Content="{x:Static res:SharedStrings.S262}" Margin="0,2" ToolTip="{x:Static res:SharedStrings.S369}" IsChecked="{Binding ExpandGematria}" />
+                  <CheckBox Content="{x:Static res:SharedStrings.S135}" Margin="0,2" ToolTip="{x:Static res:SharedStrings.S370}" IsChecked="{Binding ExpandSpelling}" />
+                  <CheckBox Content="{x:Static res:SharedStrings.S136}" Margin="0,2" ToolTip="{x:Static res:SharedStrings.S371}" IsChecked="{Binding ExpandAramaic}" />
+                  <CheckBox Content="{x:Static res:SharedStrings.S263}" Margin="0,2" ToolTip="{x:Static res:SharedStrings.S372}" IsChecked="{Binding ExpandRashiOcr}" />
+                  <CheckBox Content="{x:Static res:SharedStrings.S265}" Margin="0,2" ToolTip="{x:Static res:SharedStrings.S373}" IsChecked="{Binding ExpandWeakLetters}" />
+                  <Separator Margin="0,10,0,8" Opacity="0.5" />
+                  <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                    <TextBlock Text="{x:Static res:SharedStrings.OptionProximity}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <ui:NumberBox Minimum="0" Maximum="999" MinWidth="100" Margin="0,0,16,0" FlowDirection="LeftToRight" Value="{Binding MaxProximity}" />
+                    <TextBlock Text="{x:Static res:SharedStrings.S267}" VerticalAlignment="Center" Margin="0,0,8,0" ToolTip="{x:Static res:SharedStrings.S268}" />
+                    <ui:NumberBox Minimum="0" Maximum="10" MinWidth="84" FlowDirection="LeftToRight" Value="{Binding Fuzziness}" />
+                  </StackPanel>
+                  <CheckBox Content="{x:Static res:SharedStrings.S138}" ToolTip="{x:Static res:SharedStrings.S269}" Margin="0,0,0,8" IsChecked="{Binding RequireWordOrder}" />
+                  <StackPanel Orientation="Horizontal">
+                    <ui:Button Content="{x:Static res:SharedStrings.S270}" ToolTip="{x:Static res:SharedStrings.S271}" Margin="0,0,8,0" Padding="10,4" FontSize="12" Command="{Binding ToggleFirstWordCommand}" />
+                    <ui:Button Content="{x:Static res:SharedStrings.S272}" ToolTip="{x:Static res:SharedStrings.S273}" Padding="10,4" FontSize="12" Command="{Binding ToggleLastWordCommand}" />
+                  </StackPanel>
+                </StackPanel>
+              </Border>
+            </Popup>
+            <ui:Button Grid.Column="6" ToolTip="{x:Static res:SharedStrings.S374}" Appearance="Secondary" Margin="8,0,0,0" Padding="12,8" FontSize="14" Content="{Binding StopButtonText}" Command="{Binding CancelSearchCommand}" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVis}}" />
+            <ui:ProgressRing Grid.Column="7" IsIndeterminate="True" Width="28" Height="28" Margin="12,0,0,0" VerticalAlignment="Center" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVis}}" />
+            <Popup Name="HistoryPopup" Placement="Bottom" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade" beh:PopupReopenGuard.Enabled="True" IsOpen="{Binding IsChecked, ElementName=HistoryToggle, Mode=TwoWay}" PlacementTarget="{Binding ElementName=HistoryToggle}">
+              <Border Background="{DynamicResource ApplicationBackgroundBrush}" BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" CornerRadius="6" Padding="6" MinWidth="280" MaxWidth="500">
+                <DockPanel>
+                  <TextBlock DockPanel.Dock="Top" Text="{x:Static res:SharedStrings.S274}" FontWeight="SemiBold" Margin="6,4,6,6" />
+                  <ui:Button DockPanel.Dock="Bottom" Content="{x:Static res:SharedStrings.S276}" HorizontalAlignment="Stretch" Margin="0,6,0,0" Command="{Binding ClearHistoryCommand}" Click="OnClearHistoryClick" />
+                  <ListBox Name="HistoryList" MaxHeight="320" BorderThickness="0" ItemsSource="{Binding SearchHistory}" MouseLeftButtonUp="OnHistoryItemClick">
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate>
+                        <TextBlock Padding="6,4" TextTrimming="CharacterEllipsis" Text="{Binding}" />
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ListBox>
+                </DockPanel>
+              </Border>
+            </Popup>
+            <ui:Button Name="NewWindowButton" Appearance="Transparent" Margin="20,0,0,0" Padding="6,5" ToolTip="{x:Static res:SharedStrings.S375}" Click="OnNewWindowClick">
+              <ui:SymbolIcon Symbol="WindowNew24" />
+            </ui:Button>
+          </StackPanel>
+        </Grid>
+        <StackPanel Margin="2,10,0,0" Visibility="{Binding ShowChipSelector, Converter={StaticResource BoolToVis}}">
+          <TextBlock Text="{x:Static res:SharedStrings.S249}" Opacity="0.6" FontSize="12" Margin="0,0,0,5" />
+          <ItemsControl ItemsSource="{Binding SynonymGroups}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Grid Margin="0,0,0,4">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Opacity="0.7" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Top" Margin="0,6,8,0" Text="{Binding Source, StringFormat={}{0}:}" />
+                  <ItemsControl Grid.Column="1" ItemsSource="{Binding Chips}">
+                    <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                      </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate>
+                        <ToggleButton Margin="0,0,8,8" Padding="12,5" Cursor="Hand" FontSize="13" Content="{Binding Term}" IsChecked="{Binding IsSelected, Mode=TwoWay}">
+                          <Control.Template>
+                            <ControlTemplate TargetType="{x:Type ToggleButton}">
+                              <Border Name="ChipBorder" Background="{DynamicResource ControlFillColorSecondaryBrush}" BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" CornerRadius="14" Padding="{TemplateBinding Control.Padding}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                              </Border>
+                              <ControlTemplate.Triggers>
+                                <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                  <Setter TargetName="ChipBorder" Value="{DynamicResource AccentTextFillColorPrimaryBrush}" Property="Border.BorderBrush" />
+                                </Trigger>
+                                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                  <Setter TargetName="ChipBorder" Value="{DynamicResource AccentControlElevationFillColorRestBrush}" Property="Border.Background" />
+                                  <Setter TargetName="ChipBorder" Value="{DynamicResource AccentTextFillColorPrimaryBrush}" Property="Border.BorderBrush" />
+                                  <Setter TargetName="ChipBorder" Property="Border.BorderThickness" Value="2" />
+                                  <Setter Property="Control.FontWeight" Value="SemiBold" />
+                                </Trigger>
+                              </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                          </Control.Template>
+                        </ToggleButton>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ItemsControl>
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Visibility="{Binding HasSelectedChips, Converter={StaticResource BoolToVis}}">
+            <ui:Button Appearance="Primary" Margin="0,2,0,0" Padding="12,5" FontSize="13" Content="{Binding SearchWithSelectedLabel}" Command="{Binding SearchWithSelectedChipsCommand}" />
+            <TextBlock Text="{x:Static res:SharedStrings.S250}" Opacity="0.55" FontSize="11" VerticalAlignment="Center" Margin="10,2,0,0" />
+          </StackPanel>
+        </StackPanel>
+        <Border Margin="2,8,0,0" Padding="10,5" CornerRadius="12" HorizontalAlignment="Right" Background="{DynamicResource ControlFillColorSecondaryBrush}" BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" Visibility="{Binding HasActiveChips, Converter={StaticResource BoolToVis}}">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{x:Static res:SharedStrings.S251}" Opacity="0.7" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,8,0" />
+            <TextBlock FontSize="12" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding ActiveChipsSummary}" />
+          </StackPanel>
+        </Border>
+        <Border Margin="2,8,0,0" Padding="10,5" CornerRadius="12" HorizontalAlignment="Right" Background="{DynamicResource ControlFillColorSecondaryBrush}" BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" Visibility="{Binding HasSpellCorrection, Converter={StaticResource BoolToVis}}">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{x:Static res:SharedStrings.S252}" Opacity="0.7" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,8,0" />
+            <TextBlock FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding QueryText}" />
+            <TextBlock Text="·" Opacity="0.5" FontSize="12" VerticalAlignment="Center" Margin="8,0" />
+            <TextBlock FontSize="12" VerticalAlignment="Center">
+              <Hyperlink TextDecorations="Underline" Command="{Binding SearchTypedExactCommand}">
+                <Run Text="{x:Static res:SharedStrings.S9048}" /> <Run FontWeight="SemiBold" Text="{Binding SpellCorrectedFrom, Mode=OneWay}" /></Hyperlink>
+            </TextBlock>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </ui:Card>
+    <Grid Name="ResultsPanel" Row="1" Column="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <ui:Card Name="FilterCard" Grid.Row="0" Padding="10,6" Margin="0,0,0,8">
+        <StackPanel>
+          <FrameworkElement.LayoutTransform>
+            <ScaleTransform ScaleX="{Binding ActualWidth, ElementName=FilterCard, Converter={StaticResource ClampedScale}, ConverterParameter=640}" ScaleY="{Binding ActualWidth, ElementName=FilterCard, Converter={StaticResource ClampedScale}, ConverterParameter=640}" />
+          </FrameworkElement.LayoutTransform>
+          <WrapPanel Orientation="Horizontal">
+            <TextBlock Text="{x:Static res:SharedStrings.S254}" FontWeight="SemiBold" Opacity="0.65" VerticalAlignment="Center" Margin="0,0,14,0" />
+            <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+              <ComboBox DisplayMemberPath="Label" ToolTip="{x:Static res:SharedStrings.S376}" MinWidth="140" MaxWidth="200" Padding="7,5" Background="#00FFFFFF" BorderThickness="0" ItemsSource="{Binding ScopeOptions}" SelectedItem="{Binding SelectedScope, Mode=TwoWay}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+              <Grid>
+                <FrameworkElement.Resources>
+                  <ResourceDictionary>
+                    <Style x:Key="{x:Type ToggleButton}" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+                      <Style.Triggers>
+                        <Trigger Property="ToggleButton.IsChecked" Value="True">
+                          <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                          <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+                          <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                        </Trigger>
+                      </Style.Triggers>
+                    </Style>
+                  </ResourceDictionary>
+                </FrameworkElement.Resources>
+                <ToggleButton Name="CorpusFilterToggle" MinWidth="140" MaxWidth="200" Padding="7,5" Background="#00FFFFFF" BorderThickness="0" HorizontalContentAlignment="Stretch" ToolTip="{x:Static res:SharedStrings.S255}">
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Text="{Binding CorpusFilterSummary}" />
+                    <TextBlock Grid.Column="1" Text="▾" Margin="6,0,0,0" VerticalAlignment="Center" Opacity="0.6" />
+                  </Grid>
+                </ToggleButton>
+                <Popup Placement="Bottom" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade" beh:PopupReopenGuard.Enabled="True" IsOpen="{Binding IsChecked, ElementName=CorpusFilterToggle, Mode=TwoWay}" PlacementTarget="{Binding ElementName=CorpusFilterToggle}">
+                  <Border Background="{DynamicResource ApplicationBackgroundBrush}" BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" CornerRadius="4" Padding="8" MinWidth="180">
+                    <ItemsControl ItemsSource="{Binding CorpusFilters}">
+                      <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                          <CheckBox Margin="2,4" Content="{Binding Label}" IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                        </DataTemplate>
+                      </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                  </Border>
+                </Popup>
+              </Grid>
+            </StackPanel>
+            <ctl:TopicFilterControl Margin="0,0,0,0" DataContext="{Binding Topics}" />
+            <ctl:YearFilterControl Margin="0,0,8,0" DataContext="{Binding Years}" />
+          </WrapPanel>
+          <WrapPanel Orientation="Horizontal" Margin="0,6,0,0">
+            <ctl:SortFilterControl Margin="0,0,8,0" DataContext="{Binding Sorting}" />
+            <Border Width="1" Height="26" VerticalAlignment="Center" Margin="4,0,14,0" Background="{DynamicResource DividerStrokeColorDefaultBrush}" />
+            <ToggleButton Name="AdvancedToggle" Padding="7,5" Margin="0,0,8,0" Background="#00FFFFFF" BorderThickness="0" ToolTip="{x:Static res:SharedStrings.S377}">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Static res:SharedStrings.S260}" VerticalAlignment="Center" />
+                <TextBlock Text="▾" Margin="6,0,0,0" VerticalAlignment="Center" Opacity="0.6" />
+              </StackPanel>
+            </ToggleButton>
+            <ToggleButton Name="HistoryToggle" ToolTip="{x:Static res:SharedStrings.S274}" Margin="0,0,8,0" Padding="7,5" Background="#00FFFFFF" BorderThickness="0">
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Static res:SharedStrings.S275}" VerticalAlignment="Center" />
+                <TextBlock Text="▾" Margin="6,0,0,0" VerticalAlignment="Center" Opacity="0.6" />
+              </StackPanel>
+            </ToggleButton>
+          </WrapPanel>
+        </StackPanel>
+      </ui:Card>
+      <ui:TextBox Grid.Row="1" beh:SelectAllOnFocus.Enabled="True" PlaceholderText="{x:Static res:SharedStrings.S378}" FontSize="13" Padding="8" Margin="0,0,0,8" Text="{Binding ResultFilterText, UpdateSourceTrigger=PropertyChanged, Delay=120}" />
+      <ui:DataGrid Name="ResultsGrid" Grid.Row="2" Background="{DynamicResource ControlFillColorDefaultBrush}" RowBackground="{DynamicResource ControlFillColorDefaultBrush}" AlternatingRowBackground="{DynamicResource ControlFillColorSecondaryBrush}" beh:WheelScrollSpeed.LinesPerNotch="1" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal" HeadersVisibility="Column" RowHeight="32" FontSize="13" CanUserResizeRows="False" SelectionMode="Single" SelectionUnit="FullRow" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" EnableRowVirtualization="True" MinHeight="0" ItemsSource="{Binding Results}" SelectedItem="{Binding SelectedRow}" RowDetailsVisibilityMode="{Binding RowDetailsMode}" MouseDoubleClick="OnResultsDoubleClick">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="{x:Static res:SharedStrings.ColumnBookName}" Width="3*" Binding="{Binding Book.BookName}">
+            <DataGridBoundColumn.ElementStyle>
+              <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+              </Style>
+            </DataGridBoundColumn.ElementStyle>
+          </DataGridTextColumn>
+          <DataGridTextColumn Header="{x:Static res:SharedStrings.ColumnAuthorName}" Width="2*" Binding="{Binding Book.AuthorName}">
+            <DataGridBoundColumn.ElementStyle>
+              <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+              </Style>
+            </DataGridBoundColumn.ElementStyle>
+          </DataGridTextColumn>
+          <DataGridTextColumn Header="{x:Static res:SharedStrings.ColumnHitCount}" Width="80" Binding="{Binding HitCount}">
+            <DataGridBoundColumn.ElementStyle>
+              <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+              </Style>
+            </DataGridBoundColumn.ElementStyle>
+          </DataGridTextColumn>
+          <DataGridTemplateColumn Header="" Width="36" Visibility="{Binding Data.HasMultipleSources, Source={StaticResource VmProxy}, Converter={StaticResource BoolToVis}}">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate>
+                <ui:SymbolIcon FontSize="16" Opacity="0.75" HorizontalAlignment="Center" VerticalAlignment="Center" Symbol="{Binding Book.SourceType, Converter={StaticResource SourceTypeIcon}}" ToolTip="{Binding Book.SourceType, Converter={StaticResource SourceTypeLabel}}" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+        </DataGrid.Columns>
+        <DataGrid.RowDetailsTemplate>
+          <DataTemplate>
+            <Expander Header="{x:Static res:SharedStrings.S284}" IsExpanded="True" Background="{DynamicResource ControlFillColorTertiaryBrush}" BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="0,1,0,1" Padding="16,8">
+              <StackPanel Margin="0,8,0,0" DataContext="{Binding Book}">
+                <Grid Margin="0,0,0,6">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="{x:Static res:SharedStrings.LabelPrintPlace}" FontWeight="SemiBold" Opacity="0.7" />
+                  <TextBlock Grid.Column="1" Text="{Binding PrintPlace}" />
+                  <TextBlock Grid.Column="2" Text="{x:Static res:SharedStrings.LabelPrintYear}" FontWeight="SemiBold" Opacity="0.7" />
+                  <TextBlock Grid.Column="3" Text="{Binding PrintYear, Converter={StaticResource HebrewYear}}" />
+                </Grid>
+                <Grid Margin="0,0,0,6">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="{x:Static res:SharedStrings.LabelPages}" FontWeight="SemiBold" Opacity="0.7" />
+                  <TextBlock Grid.Column="1" Text="{Binding CountPage}" />
+                  <TextBlock Grid.Column="2" Text="{x:Static res:SharedStrings.LabelFileId}" FontWeight="SemiBold" Opacity="0.7" />
+                  <TextBlock Grid.Column="3" Text="{Binding FileID}" />
+                </Grid>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Grid.Column="0" Text="{x:Static res:SharedStrings.LabelDescription}" FontWeight="SemiBold" Opacity="0.7" VerticalAlignment="Top" />
+                  <TextBlock Grid.Column="1" TextWrapping="Wrap" Text="{Binding Description}" />
+                </Grid>
+              </StackPanel>
+            </Expander>
+          </DataTemplate>
+        </DataGrid.RowDetailsTemplate>
+      </ui:DataGrid>
+      <Border Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" Panel.ZIndex="10" Background="{DynamicResource AccentFillColorDefaultBrush}" CornerRadius="16" Padding="16,8" Margin="0,10,0,0" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVis}}">
+        <StackPanel Orientation="Horizontal">
+          <ui:ProgressRing IsIndeterminate="True" Width="20" Height="20" Margin="0,0,10,0" Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
+          <TextBlock FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" Text="{Binding StatusText}" />
+        </StackPanel>
+      </Border>
+      <TextBlock Grid.Row="3" Margin="0,8,0,0" Opacity="0.7" FontSize="12" Text="{Binding StatusText}" />
+    </Grid>
+    <GridSplitter Name="SearchSplitter" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" Width="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#00FFFFFF" ResizeBehavior="PreviousAndNext" />
+    <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" Background="{DynamicResource ApplicationBackgroundBrush}">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Name="InBookChromeBar" Grid.Row="0" Padding="8" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource ControlElevationBorderBrush}" Background="{DynamicResource ControlFillColorTertiaryBrush}">
+          <StackPanel>
+            <Grid Margin="0,0,0,6">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{x:Static res:SharedStrings.S379}" FontWeight="SemiBold" Margin="0,0,8,0" />
+              <Border Grid.Column="1" CornerRadius="6" BorderThickness="1" BorderBrush="{DynamicResource ControlElevationBorderBrush}" Background="{DynamicResource ControlFillColorDefaultBrush}">
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                  </Grid.ColumnDefinitions>
+                  <ui:TextBox Name="InBookBox" Grid.Column="0" beh:SelectAllOnFocus.Enabled="True" PlaceholderText="{x:Static res:SharedStrings.S287}" Padding="8,4" BorderThickness="0" Background="#00FFFFFF" Text="{Binding InBookSearchText, UpdateSourceTrigger=PropertyChanged}">
+                    <UIElement.InputBindings>
+                      <KeyBinding Key="Enter" Command="{Binding SearchInBookCommand}" />
+                    </UIElement.InputBindings>
+                  </ui:TextBox>
+                  <ui:Button Grid.Column="1" Appearance="Transparent" BorderThickness="0" Padding="8,3" Margin="0,1,1,1" ToolTip="{x:Static res:SharedStrings.S288}" Command="{Binding SearchInBookCommand}">
+                    <ui:SymbolIcon Symbol="Search24" FontSize="16" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
+                  </ui:Button>
+                </Grid>
+              </Border>
+              <ui:Button Name="PinChromeBtn" Grid.Column="3" MinWidth="32" Margin="4,0,0,0" Padding="4,2">
+                <ui:SymbolIcon Name="PinChromeIcon" Symbol="Pin24" />
+              </ui:Button>
+              <ui:Button Name="RegionCopyBtn" Grid.Column="4" MinWidth="32" Margin="2,0,0,0" Padding="4,2" ToolTip="{x:Static res:SharedStrings.S292}">
+                <ui:SymbolIcon Symbol="Image24" />
+              </ui:Button>
+              <ui:Button Name="RegionCopyTextBtn" Grid.Column="5" MinWidth="32" Margin="2,0,0,0" Padding="4,2" ToolTip="{x:Static res:SharedStrings.S293}">
+                <ui:SymbolIcon Symbol="TextAlignJustify24" />
+              </ui:Button>
+            </Grid>
+            <Grid Visibility="{Binding ShowInBookChrome, Converter={StaticResource BoolToVis}}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <ui:Button MinWidth="40" ToolTip="{x:Static res:SharedStrings.S294}" Command="{Binding PrevResultCommand}">
+                  <ui:SymbolIcon Symbol="ChevronDoubleRight20" />
+                </ui:Button>
+                <ui:Button MinWidth="40" ToolTip="{x:Static res:SharedStrings.S295}" Margin="4,0,0,0" Command="{Binding NextResultCommand}">
+                  <ui:SymbolIcon Symbol="ChevronDoubleLeft20" />
+                </ui:Button>
+                <TextBlock VerticalAlignment="Center" Opacity="0.85" FontWeight="SemiBold" Margin="8,0,0,0" Text="{Binding ResultPositionText, StringFormat={x:Static res:SharedStrings.S9315}}" />
+              </StackPanel>
+              <Border Grid.Column="1" Width="1" Margin="12,3,12,3" Background="{DynamicResource ControlElevationBorderBrush}" />
+              <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                <ui:Button MinWidth="36" ToolTip="{x:Static res:SharedStrings.S296}" Margin="0,0,4,0" Command="{Binding PrevMatchCommand}">
+                  <ui:SymbolIcon Symbol="ChevronRight24" />
+                </ui:Button>
+                <ui:Button MinWidth="36" ToolTip="{x:Static res:SharedStrings.S297}" Command="{Binding NextMatchCommand}">
+                  <ui:SymbolIcon Symbol="ChevronLeft24" />
+                </ui:Button>
+                <TextBlock VerticalAlignment="Center" Opacity="0.85" FontWeight="SemiBold" Margin="8,0,0,0" Text="{Binding MatchPositionText}" />
+              </StackPanel>
+              <ComboBox Grid.Column="3" ToolTip="{x:Static res:SharedStrings.S298}" Padding="8,4" MinWidth="92" MaxDropDownHeight="320" Margin="8,0,0,0" ItemsSource="{Binding CurrentBookHits.Pages}" SelectedItem="{Binding SelectedHitPage, Mode=TwoWay}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding StringFormat={x:Static res:SharedStrings.S9310}}" />
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ComboBox>
+              <TextBlock Grid.Column="4" VerticalAlignment="Center" Margin="16,0,8,0" Text="{x:Static res:SharedStrings.S380}" FontWeight="SemiBold" Opacity="0.65" />
+              <TextBlock Grid.Column="5" VerticalAlignment="Center" Opacity="0.85" TextTrimming="CharacterEllipsis" Text="{Binding InBookDisplayQuery}" />
+              <ui:Button Grid.Column="6" MinWidth="36" ToolTip="{x:Static res:SharedStrings.S325}" Margin="12,0,0,0" Click="OnOpenExternalClick">
+                <ui:SymbolIcon Symbol="Open24" />
+              </ui:Button>
+              <ui:Button Name="ImmersiveBtn" Grid.Column="7" MinWidth="36" ToolTip="{x:Static res:SharedStrings.S291}" Margin="8,0,0,0" Click="OnToggleImmersiveClick">
+                <ui:SymbolIcon Name="ImmersiveIcon" Symbol="FullScreenMaximize24" />
+              </ui:Button>
+            </Grid>
+            <Grid Margin="0,6,0,0" Visibility="{Binding ShowHitPagesStrip, Converter={StaticResource BoolToVis}}">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="12" FontWeight="SemiBold" Opacity="0.8" Text="{Binding CurrentBookHits.Pages.Count, StringFormat={x:Static res:SharedStrings.S9312}}" />
+              <ui:Button Grid.Column="1" Content="‹" Tag="-1" MinWidth="28" Padding="0" Margin="0,0,2,0" ToolTip="{x:Static res:SharedStrings.S299}" Click="OnHitStripScrollClick" />
+              <ListBox Name="HitStripList" Grid.Column="2" Style="{StaticResource HitPagesStrip}" beh:ListBoxScrollIntoView.Enabled="True" ItemsSource="{Binding CurrentBookHits.Pages}" SelectedItem="{Binding SelectedHitPage, Mode=TwoWay}" />
+              <ui:Button Grid.Column="3" Content="›" Tag="1" MinWidth="28" Padding="0" Margin="2,0,0,0" ToolTip="{x:Static res:SharedStrings.S299}" Click="OnHitStripScrollClick" />
+            </Grid>
+            <TextBlock Margin="0,6,0,0" Opacity="0.8" FontSize="12" Text="{Binding InBookSearchStatus}" Visibility="{Binding InBookSearchStatus, Converter={StaticResource StringNotEmptyToVisibility}}" />
+          </StackPanel>
+        </Border>
+        <Grid Row="1">
+          <ctl:PdfJsHost x:Name="PdfView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+          <TextBlock Name="PdfPlaceholder" Text="{x:Static res:SharedStrings.S381}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Opacity="0.5" IsHitTestVisible="False" />
+        </Grid>
+      </Grid>
+    </Border>
+  </Grid>
+</Page>

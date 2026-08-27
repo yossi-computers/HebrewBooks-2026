@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="HebrewBooks.UI.Controls.DonateStrip" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:res="clr-namespace:HebrewBooks.UI.Resources" xmlns:m="clr-namespace:HebrewBooks.UI.Markup" xmlns:controls="clr-namespace:HebrewBooks.UI.Controls" FlowDirection="{m:LangFlow}">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Border Background="{DynamicResource ControlFillColorTertiaryBrush}" BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="0,1,0,1" Padding="16,6" Visibility="{Binding Visible, Converter={StaticResource BoolToVis}}">
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <ui:SymbolIcon Grid.Column="0" Symbol="Heart24" FontSize="18" VerticalAlignment="Center" Margin="0,0,10,0" Foreground="#FFD0483C" />
+      <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0,12,0">
+        <TextBlock Name="StripLine" TextWrapping="Wrap" FontSize="12" LineHeight="17" Foreground="{DynamicResource TextFillColorPrimaryBrush}">
+          <Run Text="{Binding StripText, Mode=OneWay}" />
+          <Run Text=" " />
+          <Hyperlink Name="DedicateLink" TextDecorations="Underline" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" Command="{Binding OpenDedicationCommand}">
+            <Run Text="{Binding DedicationLinkText, Mode=OneWay}" />
+          </Hyperlink>
+        </TextBlock>
+        <TextBlock FontSize="11" Margin="0,2,0,0" Opacity="0.75" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{Binding DedicationLine}" Visibility="{Binding DedicationLineVisible, Converter={StaticResource BoolToVis}}" />
+      </StackPanel>
+      <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,12,0" Visibility="{Binding MeterVisible, Converter={StaticResource BoolToVis}}">
+        <TextBlock FontSize="11" Opacity="0.8" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{Binding MeterLabel}" />
+        <ProgressBar Minimum="0" Maximum="100" Width="90" Height="5" VerticalAlignment="Center" Value="{Binding MeterPercent}" />
+      </StackPanel>
+      <ui:Button Grid.Column="3" Appearance="Primary" MinWidth="120" Padding="10,5" Command="{Binding DonateCommand}" ToolTip="{Binding ButtonTooltip}">
+        <StackPanel Orientation="Horizontal">
+          <ui:SymbolIcon Symbol="Heart24" FontSize="14" Margin="0,0,6,0" />
+          <TextBlock VerticalAlignment="Center" Text="{Binding ButtonText}" />
+        </StackPanel>
+      </ui:Button>
+    </Grid>
+  </Border>
+</UserControl>

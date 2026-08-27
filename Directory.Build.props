@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>annotations</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <PlatformTarget>x86</PlatformTarget>
+    <Platforms>x86</Platforms>
+    <EnableDefaultItems>true</EnableDefaultItems>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+
+    <Company>HebrewBooks</Company>
+    <Product>HebrewBooks</Product>
+    <Copyright>© HebrewBooks</Copyright>
+    <Version>3.0.119</Version>
+    <AssemblyVersion>3.0.119.0</AssemblyVersion>
+    <FileVersion>3.0.119.0</FileVersion>
+
+    <!-- decompiled sources: silence the noise, keep real errors -->
+    <NoWarn>$(NoWarn);CS0108;CS0114;CS0168;CS0169;CS0219;CS0414;CS0618;CS0649;CS1591;CS8632;CS8981;SYSLIB0011;SYSLIB0051;CS9113</NoWarn>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+</Project>

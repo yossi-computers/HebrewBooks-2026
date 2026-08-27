@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader><resheader name="version"><value>1.3</value></resheader><resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader><data name="C6" xml:space="preserve"><value>הורדה נכשלה: </value></data>
+  <data name="C7" xml:space="preserve"><value>לא PDF (תגובה </value></data>
+  <data name="C4" xml:space="preserve"><value>מחיקת ספרים אינה זמינה בעמדת רשת — נהל את המאגר מהשרת</value></data>
+  <data name="C5" xml:space="preserve"><value>סוג ספר לא נתמך למחיקה</value></data>
+  <data name="C2" xml:space="preserve"><value>מחיקת הקובץ נכשלה: </value></data>
+  <data name="C3" xml:space="preserve"><value>אין הרשאה למחוק את הקובץ: </value></data>
+  <data name="C1" xml:space="preserve"><value>מוריד את שאר המאגר (אינדקס/ספרים)</value></data>
+  <data name="C8" xml:space="preserve"><value> בייטים — הספר ככל הנראה לא זמין באתר)</value></data>
+  <data name="C9" xml:space="preserve"><value>ספר </value></data>
+  <data name="C71" xml:space="preserve"><value>ייתכן שחיפוש לפי שם-ספר/מחבר יחזיר תוצאות חלקיות.</value></data>
+  <data name="C70" xml:space="preserve"><value>אינדקס שמות-הספרים (FTS) אינו מסונכרן</value></data>
+  <data name="C73" xml:space="preserve"><value>אינדקס ה-FTS נבנה מחדש.</value></data>
+  <data name="C72" xml:space="preserve"><value>בנה מחדש את אינדקס ה-FTS</value></data>
+  <data name="C75" xml:space="preserve"><value>קובץ הקטלוג פגום</value></data>
+  <data name="C74" xml:space="preserve"><value>זה תקין ומקובל בקטלוג — מספר רשומות יכולות להצביע על אותו קובץ.</value></data>
+  <data name="C77" xml:space="preserve"><value>ההורדה בדרך (רשת מסננת/פרוקסי). בלעדיו אי-אפשר לעיין או לחפש. </value></data>
+  <data name="C76" xml:space="preserve"><value>קובץ הקטלוג ניזוק ("database disk image is malformed") — כמעט תמיד השחתה של </value></data>
+  <data name="C79" xml:space="preserve"><value>לחץ למחיקת הקובץ הפגום ולהורדת קטלוג תקין מחדש.</value></data>
+  <data name="C78" xml:space="preserve"><value>בתחנת-רשת: העתק קטלוג תקין מהשרת (או הפעל את סנכרון-הקטלוג מחדש).</value></data>
+  <data name="C60" xml:space="preserve"><value>). סגור את התוכנה הראשית ונסה שוב.</value></data>
+  <data name="C61" xml:space="preserve"><value>ההורדה נכשלה: </value></data>
+  <data name="C62" xml:space="preserve"><value>. בדוק את חיבור-האינטרנט ונסה שוב.</value></data>
+  <data name="C63" xml:space="preserve"><value>הורד קטלוג תקין מחדש (</value></data>
+  <data name="C64" xml:space="preserve"><value> רשומות). הפעל מחדש את התוכנה.</value></data>
+  <data name="C65" xml:space="preserve"><value>הקטלוג הורד אך עדיין אינו נקרא: </value></data>
+  <data name="C66" xml:space="preserve"><value>קטלוג</value></data>
+  <data name="C67" xml:space="preserve"><value>קובץ הקטלוג חסר</value></data>
+  <data name="C68" xml:space="preserve"><value>לא נמצא קובץ הקטלוג. בלעדיו אי-אפשר לעיין או לחפש.</value></data>
+  <data name="C69" xml:space="preserve"><value>
+(נפתח לקריאה-בלבד — מיקום רשת/קריאה-בלבד)</value></data>
+  <data name="C53" xml:space="preserve"><value> רשומות</value></data>
+  <data name="C52" xml:space="preserve"><value>הקטלוג תקין — </value></data>
+  <data name="C51" xml:space="preserve"><value>דוגמאות:
+</value></data>
+  <data name="C50" xml:space="preserve"><value>אין רשומות מתאימות לדגימה.</value></data>
+  <data name="C57" xml:space="preserve"><value> רשומות אך באינדקס ה-FTS </value></data>
+  <data name="C56" xml:space="preserve"><value>בקטלוג </value></data>
+  <data name="C55" xml:space="preserve"><value>   אישי: </value></data>
+  <data name="C54" xml:space="preserve"><value>   טקסט (אוצריא): </value></data>
+  <data name="C59" xml:space="preserve"><value>לא ניתן למחוק את הקובץ הפגום (</value></data>
+  <data name="C58" xml:space="preserve"><value> מזהי-קובץ (FileID) מופיעים ביותר מרשומה אחת</value></data>
+  <data name="C42" xml:space="preserve"><value> חסרים (</value></data>
+  <data name="C43" xml:space="preserve"><value>הערכה: ~</value></data>
+  <data name="C40" xml:space="preserve"><value>במדגם של </value></data>
+  <data name="C41" xml:space="preserve"><value> קבצים, </value></data>
+  <data name="C46" xml:space="preserve"><value>קבצי ספרים</value></data>
+  <data name="C47" xml:space="preserve"><value>התקנה ללא קבצים מקומיים מלאים</value></data>
+  <data name="C44" xml:space="preserve"><value> מתוך ~</value></data>
+  <data name="C45" xml:space="preserve"><value> ספרים מופיעים בקטלוג אך הקובץ שלהם אינו על הדיסק.</value></data>
+  <data name="C48" xml:space="preserve"><value>לכן חוסר קבצים מקומיים אינו תקלה.</value></data>
+  <data name="C49" xml:space="preserve"><value>ספרי PDF</value></data>
+  <data name="C35" xml:space="preserve"><value>קבצי </value></data>
+  <data name="C34" xml:space="preserve"><value>לא נדגמו קבצים עבור </value></data>
+  <data name="C37" xml:space="preserve"><value>נבדק מדגם של </value></data>
+  <data name="C36" xml:space="preserve"><value> קיימים על הדיסק</value></data>
+  <data name="C31" xml:space="preserve"><value>=== ארון הספרים הדיגיטלי — דוח בדיקת תקינות ===</value></data>
+  <data name="C30" xml:space="preserve"><value>סיכום: OK=</value></data>
+  <data name="C33" xml:space="preserve"><value>. קבצי PDF יורדים לפי דרישה, </value></data>
+  <data name="C32" xml:space="preserve"><value>סוג התקנה: </value></data>
+  <data name="C39" xml:space="preserve"><value>חסרים קבצים בפועל עבור </value></data>
+  <data name="C38" xml:space="preserve"><value> קבצים — כולם נמצאו (מתוך ~</value></data>
+  <data name="C24" xml:space="preserve"><value>האינדקס עודכן.</value></data>
+  <data name="C25" xml:space="preserve"><value>הבדיקה נכשלה</value></data>
+  <data name="C26" xml:space="preserve"><value>אירעה שגיאה בלתי-צפויה במהלך הבדיקה.</value></data>
+  <data name="C27" xml:space="preserve"><value>נוצר (UTC): </value></data>
+  <data name="C20" xml:space="preserve"><value>כותב את הקובץ המתוקן במקום המקורי...</value></data>
+  <data name="C21" xml:space="preserve"><value>מעדכן את מנוע החיפוש (אינדקס)...</value></data>
+  <data name="C22" xml:space="preserve"><value>מסיר את הגרסה הישנה מהאינדקס...</value></data>
+  <data name="C23" xml:space="preserve"><value>מוסיף את הגרסה המתוקנת לאינדקס...</value></data>
+  <data name="C28" xml:space="preserve"><value>גרסה: </value></data>
+  <data name="C29" xml:space="preserve"><value>מערכת: </value></data>
+  <data name="C17" xml:space="preserve"><value>, טעינת מודל)... זה עשוי לקחת מספר שניות</value></data>
+  <data name="C16" xml:space="preserve"><value>מפעיל את מנוע ה-OCR (</value></data>
+  <data name="C15" xml:space="preserve"><value>מאגר אישי</value></data>
+  <data name="C14" xml:space="preserve"><value>(ללא שם)</value></data>
+  <data name="C13" xml:space="preserve"><value>זוהתה חסימת NetFree — מוריד דרך api.github.com (גיבוי)…</value></data>
+  <data name="C12" xml:space="preserve"><value>כקובץ דחוס אחד (כ-1.5GB) — זה ייקח יותר זמן, אך זו ההורדה היחידה שעוברת את הסינון.</value></data>
+  <data name="C11" xml:space="preserve"><value>זוהתה חסימת NetFree (raw.githubusercontent.com חסום). עוברים להורדת כל המאגר </value></data>
+  <data name="C10" xml:space="preserve"><value>הקובץ לא נשמר (curl לא יצר אותו)</value></data>
+  <data name="C19" xml:space="preserve"><value>מזריק את שכבת הטקסט המתוקנת לקובץ...</value></data>
+  <data name="C18" xml:space="preserve"><value>מגבה את הקובץ המקורי...</value></data>
+  <data name="C99" xml:space="preserve"><value>מעט מקום פנוי ב</value></data>
+  <data name="C98" xml:space="preserve"><value> (מומלץ לפחות </value></data>
+  <data name="C97" xml:space="preserve"><value>כונן: (נתיב רשת / לא ניתן לזיהוי)</value></data>
+  <data name="C96" xml:space="preserve"><value>סוג התקנה: מקומי/USB</value></data>
+  <data name="C95" xml:space="preserve"><value>סוג התקנה: רשת/שרת</value></data>
+  <data name="C94" xml:space="preserve"><value>מספר סידורי שמור: (אין)</value></data>
+  <data name="C93" xml:space="preserve"><value>כונן הנתונים אותר</value></data>
+  <data name="C92" xml:space="preserve"><value>סומן לאיתור מחדש. חבר את הכונן והפעל מחדש את התוכנה.</value></data>
+  <data name="C91" xml:space="preserve"><value>אתר מחדש את הכונן</value></data>
+  <data name="C90" xml:space="preserve"><value>ודא שכונן ה-USB מחובר, או שמיקום הרשת זמין.</value></data>
+  <data name="C88" xml:space="preserve"><value>כונן הנתונים לא נמצא</value></data>
+  <data name="C89" xml:space="preserve"><value>התוכנה לא הצליחה לאתר את תיקיית הנתונים (App\Katalog.db). </value></data>
+  <data name="C86" xml:space="preserve"><value>  פנוי: </value></data>
+  <data name="C87" xml:space="preserve"><value>מאגר נתונים</value></data>
+  <data name="C84" xml:space="preserve"><value>כונן: </value></data>
+  <data name="C85" xml:space="preserve"><value>  סוג: </value></data>
+  <data name="C82" xml:space="preserve"><value>נתיב: </value></data>
+  <data name="C83" xml:space="preserve"><value>מספר סידורי שמור: </value></data>
+  <data name="C80" xml:space="preserve"><value>מחק והורד קטלוג מחדש</value></data>
+  <data name="C81" xml:space="preserve"><value>מיקום הנתונים: </value></data>
+  <data name="C204" xml:space="preserve"><value>תיקיית השרת המשותפת זמינה</value></data>
+  <data name="C205" xml:space="preserve"><value>תיקיית השרת המשותפת אינה זמינה</value></data>
+  <data name="C206" xml:space="preserve"><value>החיבור לתיקייה המשותפת בשרת תקין.</value></data>
+  <data name="C207" xml:space="preserve"><value>לא ניתן להגיע לתיקייה המשותפת בשרת. ודא שהשרת דלוק ושהרשת מחוברת.</value></data>
+  <data name="C200" xml:space="preserve"><value>אין ממצאים חריגים ביומן</value></data>
+  <data name="C201" xml:space="preserve"><value>השירות עונה (קוד </value></data>
+  <data name="C202" xml:space="preserve"><value>). חיפוש בתוכן ירוץ בשרת.</value></data>
+  <data name="C203" xml:space="preserve"><value>רשת (התקנת שרת)</value></data>
+  <data name="C208" xml:space="preserve"><value>קטלוג המאסטר נמצא בשרת</value></data>
+  <data name="C209" xml:space="preserve"><value>קטלוג המאסטר לא נמצא בשרת</value></data>
+  <data name="C226" xml:space="preserve"><value>לא ניתן לקרוא את קובץ ההגדרות. אפשר לאפס אותו (גיבוי יישמר אוטומטית).</value></data>
+  <data name="C227" xml:space="preserve"><value>גבה ואפס הגדרות</value></data>
+  <data name="C224" xml:space="preserve"><value>התוכנה משתמשת בברירות-מחדל. הקובץ ייווצר עם השינוי הראשון בהגדרות.</value></data>
+  <data name="C225" xml:space="preserve"><value>קובץ ההגדרות פגום</value></data>
+  <data name="C222" xml:space="preserve"><value>הגדרות</value></data>
+  <data name="C223" xml:space="preserve"><value>קובץ ההגדרות עדיין לא נוצר</value></data>
+  <data name="C220" xml:space="preserve"><value>ערוץ בטא: </value></data>
+  <data name="C221" xml:space="preserve"><value>שיתוף נתוני שימוש: </value></data>
+  <data name="C228" xml:space="preserve"><value>טרם נשאל</value></data>
+  <data name="C229" xml:space="preserve"><value>ההגדרות נקראו בהצלחה</value></data>
+  <data name="C215" xml:space="preserve"><value>ודא שהשירות פועל בשרת ושהכתובת/פורט נכונים.</value></data>
+  <data name="C214" xml:space="preserve"><value>לא ניתן להגיע לשירות החיפוש (hbsearch) בשרת — חיפוש בתוכן לא יעבוד בתחנה זו. </value></data>
+  <data name="C217" xml:space="preserve"><value>מצב נעול (קיוסק): </value></data>
+  <data name="C216" xml:space="preserve"><value>ההגדרות אופסו. גיבוי נשמר ב: </value></data>
+  <data name="C211" xml:space="preserve"><value>לא נמצא קובץ קטלוג מרכזי בשרת — התחנה תעבוד עם העותק המקומי בלבד.</value></data>
+  <data name="C210" xml:space="preserve"><value>קובץ הקטלוג המרכזי בשרת זמין. סנכרון מתבצע אוטומטית בהפעלת התוכנה.</value></data>
+  <data name="C213" xml:space="preserve"><value>שירות החיפוש בשרת אינו מגיב</value></data>
+  <data name="C212" xml:space="preserve"><value>שירות החיפוש בשרת מגיב</value></data>
+  <data name="C219" xml:space="preserve"><value>ערכת נושא: </value></data>
+  <data name="C218" xml:space="preserve"><value>התקנת רשת: </value></data>
+  <data name="C230" xml:space="preserve"><value>הקטלוג ריק</value></data>
+  <data name="C161" xml:space="preserve"><value>(אין פירוט)</value></data>
+  <data name="C160" xml:space="preserve"><value>בדיקת החיפוש בפועל מול אינדקס זה נכשלה — ייתכן שהאינדקס נעול או שהמנוע לא נטען.</value></data>
+  <data name="C163" xml:space="preserve"><value>בשקט — למרות שהספרים קיימים. שתי סיבות אפשריות: (1) האינדקס נבנה עם הגדרות מנוע/אלפבית </value></data>
+  <data name="C162" xml:space="preserve"><value>(את, אשר, כל, על…) לא החזיר אף תוצאה. משמעות הדבר שהחיפוש בקורפוס זה "מוצא כלום" </value></data>
+  <data name="C165" xml:space="preserve"><value>(PDF סרוק ללא OCR). בשני המקרים הפתרון הוא בנייה מחדש של האינדקס.</value></data>
+  <data name="C164" xml:space="preserve"><value>שונות מאלה שבתוכנה הנוכחית ולכן אינו תואם; (2) לספרי המקור אין שכבת טקסט לחיפוש </value></data>
+  <data name="C167" xml:space="preserve"><value>הקטלוג כולל ~</value></data>
+  <data name="C166" xml:space="preserve"><value>אין אינדקס חיפוש עבור </value></data>
+  <data name="C169" xml:space="preserve"><value>חסרים ~</value></data>
+  <data name="C168" xml:space="preserve"><value> פריטים מסוג זה אך לא נמצא אינדקס תקין. חיפוש בתוכן לא יעבוד עבורם.</value></data>
+  <data name="C170" xml:space="preserve"><value> ספרים באינדקס של </value></data>
+  <data name="C171" xml:space="preserve"><value> מסמכים, בקטלוג ~</value></data>
+  <data name="C172" xml:space="preserve"><value>. חיפוש בתוכן עלול לפספס ספרים שלא נכנסו לאינדקס.</value></data>
+  <data name="C173" xml:space="preserve"><value>
+אינדקס=</value></data>
+  <data name="C174" xml:space="preserve"><value>  קטלוג(ייחודי)=</value></data>
+  <data name="C175" xml:space="preserve"><value> מעודכן</value></data>
+  <data name="C176" xml:space="preserve"><value> מסמכים באינדקס (קטלוג: ~</value></data>
+  <data name="C177" xml:space="preserve"><value>לא נמצא אינדקס (הקורפוס כנראה אינו בשימוש).</value></data>
+  <data name="C178" xml:space="preserve"><value>התיקייה קיימת אך אין קובץ מניפסט (hb-manifest.json)</value></data>
+  <data name="C179" xml:space="preserve"><value>התיקייה אינה קיימת</value></data>
+  <data name="C143" xml:space="preserve"><value>לא</value></data>
+  <data name="C142" xml:space="preserve"><value>כן</value></data>
+  <data name="C141" xml:space="preserve"><value>ארכיטקטורת התהליך אינה x86</value></data>
+  <data name="C140" xml:space="preserve"><value>מידע מערכת</value></data>
+  <data name="C147" xml:space="preserve"><value>האינדקס כולל </value></data>
+  <data name="C146" xml:space="preserve"><value> אינו מחזיר תוצאות חיפוש</value></data>
+  <data name="C145" xml:space="preserve"><value>האינדקס של </value></data>
+  <data name="C144" xml:space="preserve"><value>לא ניתן היה לבדוק חיפוש בתוכן עבור </value></data>
+  <data name="C149" xml:space="preserve"><value>
+מסמכים באינדקס=</value></data>
+  <data name="C148" xml:space="preserve"><value> מסמכים, אך חיפוש של מילים עבריות נפוצות ביותר </value></data>
+  <data name="C152" xml:space="preserve"><value>החיפוש בתוכן של </value></data>
+  <data name="C153" xml:space="preserve"><value> תקין</value></data>
+  <data name="C150" xml:space="preserve"><value>  תוצאות לבדיקת-תוכן=</value></data>
+  <data name="C151" xml:space="preserve"><value>בנה אינדקס מחדש (</value></data>
+  <data name="C156" xml:space="preserve"><value> מסמכים תואמים למילים נפוצות).</value></data>
+  <data name="C157" xml:space="preserve"><value>אינדקס חיפוש</value></data>
+  <data name="C154" xml:space="preserve"><value>בדיקת חיפוש החזירה תוצאות (</value></data>
+  <data name="C155" xml:space="preserve"><value> מתוך </value></data>
+  <data name="C158" xml:space="preserve"><value>לא ניתן היה לבדוק את תוכן האינדקס</value></data>
+  <data name="C159" xml:space="preserve"><value>אירעה שגיאה בעת בדיקת החיפוש בפועל מול האינדקסים.</value></data>
+  <data name="C125" xml:space="preserve"><value>נמצאו קבצים בדיסק אך אין אינדקס תקין, כך שחיפוש בתוכן לא ימצא אותם.</value></data>
+  <data name="C124" xml:space="preserve"><value>אוצריא (טקסט)</value></data>
+  <data name="C127" xml:space="preserve"><value>מנוע החיפוש (dtSearch) נטען בהצלחה</value></data>
+  <data name="C126" xml:space="preserve"><value>מנוע חיפוש (dtSearch)</value></data>
+  <data name="C121" xml:space="preserve"><value> קבצים, וכולם באינדקס.</value></data>
+  <data name="C120" xml:space="preserve"><value>בדיסק </value></data>
+  <data name="C123" xml:space="preserve"><value>ספרים בדיסק מול אינדקס</value></data>
+  <data name="C122" xml:space="preserve"><value>עדכן אינדקס (</value></data>
+  <data name="C129" xml:space="preserve"><value>מנוע החיפוש המקומי אינו נטען (תחנת רשת)</value></data>
+  <data name="C128" xml:space="preserve"><value>המנוע הנייטיב זמין — חיפוש בתוכן יעבוד.</value></data>
+  <data name="C134" xml:space="preserve"><value>התקן אותה והפעל מחדש את התוכנה.</value></data>
+  <data name="C135" xml:space="preserve"><value>מנוע החיפוש הנייטיב נטען בהצלחה.</value></data>
+  <data name="C136" xml:space="preserve"><value>   ארכיטקטורת תהליך: </value></data>
+  <data name="C137" xml:space="preserve"><value>מערכת הפעלה: </value></data>
+  <data name="C130" xml:space="preserve"><value>בתחנה זו החיפוש בתוכן מתבצע בשרת, ולכן המנוע המקומי אינו נדרש — אין בכך תקלה.</value></data>
+  <data name="C131" xml:space="preserve"><value>מנוע החיפוש (dtSearch) לא נטען</value></data>
+  <data name="C132" xml:space="preserve"><value>חיפוש בתוכן לא יעבוד. הסיבה הנפוצה: חבילת הרכיבים של מיקרוסופט </value></data>
+  <data name="C133" xml:space="preserve"><value>(Visual C++ 2015–2022 x86 Redistributable) חסרה במחשב. </value></data>
+  <data name="C138" xml:space="preserve"><value>תהליך 64-bit: </value></data>
+  <data name="C139" xml:space="preserve"><value>שם מחשב: </value></data>
+  <data name="C107" xml:space="preserve"><value>)
+באינדקס: </value></data>
+  <data name="C106" xml:space="preserve"><value> קבצים (</value></data>
+  <data name="C105" xml:space="preserve"><value>בדיסק: </value></data>
+  <data name="C104" xml:space="preserve"><value>כונן הנתונים</value></data>
+  <data name="C103" xml:space="preserve"><value>כונן המשתמש (%AppData%)</value></data>
+  <data name="C102" xml:space="preserve"><value>מקום בדיסק</value></data>
+  <data name="C101" xml:space="preserve"><value> — פנוי </value></data>
+  <data name="C100" xml:space="preserve"><value>מספיק מקום פנוי ב</value></data>
+  <data name="C109" xml:space="preserve"><value>אין אינדקס ל</value></data>
+  <data name="C108" xml:space="preserve"><value> מסמכים
+</value></data>
+  <data name="C116" xml:space="preserve"><value> רשומות ללא קובץ בדיסק (</value></data>
+  <data name="C117" xml:space="preserve"><value> מסמכים אך בדיסק רק </value></data>
+  <data name="C114" xml:space="preserve"><value>. הספרים החסרים לא יימצאו בחיפוש בתוכן עד לעדכון האינדקס.</value></data>
+  <data name="C115" xml:space="preserve"><value>באינדקס </value></data>
+  <data name="C112" xml:space="preserve"><value>בדיסק יש </value></data>
+  <data name="C113" xml:space="preserve"><value> קבצים אך באינדקס רק </value></data>
+  <data name="C110" xml:space="preserve"><value> ספרים בדיסק לא ניתנים לחיפוש</value></data>
+  <data name="C111" xml:space="preserve"><value> ספרים בדיסק אינם באינדקס (</value></data>
+  <data name="C118" xml:space="preserve"><value> קבצים. ייתכנו רשומות ישנות של ספרים שנמחקו — אין בכך נזק (התוצאות מסוננות מול הקטלוג).</value></data>
+  <data name="C119" xml:space="preserve"><value>כל הספרים בדיסק נמצאים באינדקס (</value></data>
+  <data name="C189" xml:space="preserve"><value> השורות האחרונות של </value></data>
+  <data name="C188" xml:space="preserve"><value>נבדקו </value></data>
+  <data name="C187" xml:space="preserve"><value> פעמים</value></data>
+  <data name="C186" xml:space="preserve"><value>הודעה חוזרת ביומן </value></data>
+  <data name="C185" xml:space="preserve"><value> שורות חריגות ביומן (לא בהכרח שגיאות)</value></data>
+  <data name="C184" xml:space="preserve"><value> אזהרות ביומן האחרון</value></data>
+  <data name="C183" xml:space="preserve"><value>. להלן דוגמאות אחרונות (חשובות לתמיכה).</value></data>
+  <data name="C182" xml:space="preserve"><value>קובץ: </value></data>
+  <data name="C181" xml:space="preserve"><value> שגיאות ביומן האחרון</value></data>
+  <data name="C180" xml:space="preserve"><value>נמצאו </value></data>
+  <data name="C198" xml:space="preserve"><value>פגום/קטוע, פסק-זמן, ניסיון חוזר, זיכרון וכו').</value></data>
+  <data name="C199" xml:space="preserve"><value>הודעה שחוזרת שוב ושוב עשויה להעיד על לולאה / ניסיונות חוזרים.</value></data>
+  <data name="C196" xml:space="preserve"><value>אזהרות אינן בהכרח תקלה, אך כדאי לעיין בהן.</value></data>
+  <data name="C197" xml:space="preserve"><value>שורות שהניסוח שלהן מרמז על משהו לא-שגרתי (נפילה-לחלופה, קריאה-בלבד, </value></data>
+  <data name="C194" xml:space="preserve"><value>לא נמצאו קובצי יומן</value></data>
+  <data name="C195" xml:space="preserve"><value>תיקיית היומנים ריקה.</value></data>
+  <data name="C192" xml:space="preserve"><value>לא נמצאה תיקיית יומנים</value></data>
+  <data name="C193" xml:space="preserve"><value>אין יומנים לבדיקה (ייתכן שהתוכנה עדיין לא הופעלה במחשב זה).</value></data>
+  <data name="C190" xml:space="preserve"><value> — ללא שגיאות, אזהרות או חריגות.</value></data>
+  <data name="C191" xml:space="preserve"><value>יומני שגיאות</value></data>
+  </root>

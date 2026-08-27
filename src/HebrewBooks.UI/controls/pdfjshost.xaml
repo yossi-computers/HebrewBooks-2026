@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="HebrewBooks.UI.Controls.PdfJsHost" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:res="clr-namespace:HebrewBooks.UI.Resources" xmlns:m="clr-namespace:HebrewBooks.UI.Markup" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf" FlowDirection="LeftToRight" xmlns:controls="clr-namespace:HebrewBooks.UI.Controls">
+  <Grid>
+    <wv:WebView2 Name="PdfView" />
+    <wv:WebView2 Name="TextView" Visibility="Collapsed" />
+    <Border Name="LoadingOverlay" Background="#1A1A1A" Visibility="Collapsed" IsHitTestVisible="True">
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ui:ProgressRing IsIndeterminate="True" Width="64" Height="64" Foreground="#FFD500" />
+        <TextBlock Text="{x:Static res:SharedStrings.S4}" Foreground="#FFFFFFFF" FontSize="18" HorizontalAlignment="Center" Margin="0,18,0,0" FontWeight="SemiBold" FlowDirection="{m:LangFlow}" />
+      </StackPanel>
+    </Border>
+  </Grid>
+</UserControl>

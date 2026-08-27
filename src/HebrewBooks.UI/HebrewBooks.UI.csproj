@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>HebrewBooks.UI</RootNamespace>
+    <AssemblyName>HebrewBooks</AssemblyName>
+    <ApplicationIcon>resources\hebrewbooks.ico</ApplicationIcon>
+    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Microsoft.Extensions.Http" />
+    <PackageReference Include="Microsoft.Web.WebView2" />
+    <PackageReference Include="PdfiumViewer" />
+    <PackageReference Include="PdfiumViewer.Native.x86.v8-xfa" />
+    <PackageReference Include="Serilog.Extensions.Hosting" />
+    <PackageReference Include="Serilog.Sinks.Debug" />
+    <PackageReference Include="Serilog.Sinks.File" />
+    <PackageReference Include="System.Management" />
+    <PackageReference Include="Velopack" />
+    <PackageReference Include="WPF-UI" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HebrewBooks.Core\HebrewBooks.Core.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Data\HebrewBooks.Data.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Diagnostics.Ui\HebrewBooks.Diagnostics.Ui.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Infrastructure\HebrewBooks.Infrastructure.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Search\HebrewBooks.Search.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Services\HebrewBooks.Services.csproj" />
+  </ItemGroup>
+</Project>

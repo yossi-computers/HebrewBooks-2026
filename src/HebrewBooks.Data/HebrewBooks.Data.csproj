@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>HebrewBooks.Data</RootNamespace>
+    <AssemblyName>HebrewBooks.Data</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" />
+    <PackageReference Include="Microsoft.Data.Sqlite" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HebrewBooks.Core\HebrewBooks.Core.csproj" />
+  </ItemGroup>
+</Project>

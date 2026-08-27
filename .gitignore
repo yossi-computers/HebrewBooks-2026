@@ -1,0 +1,17 @@
+## build output
+bin/
+obj/
+.vs/
+*.user
+
+## release output
+publish/
+releases/
+*.nupkg
+
+## heavy redistributable runtime assets (repopulated from an installed copy by בנה.bat)
+assets/runtime/qpdf/
+assets/runtime/x86/
+assets/runtime/cite.db
+assets/runtime/icudt63.dll
+assets/runtime/synonyms.db

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>HebrewBooks.Diagnostics.Ui</RootNamespace>
+    <AssemblyName>HebrewBooks.Diagnostics.Ui</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="WPF-UI" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HebrewBooks.Diagnostics\HebrewBooks.Diagnostics.csproj" />
+  </ItemGroup>
+</Project>

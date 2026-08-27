@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="HebrewBooks.UI.Views.DiagnosticsPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="clr-namespace:HebrewBooks.UI.Markup" xmlns:diag="clr-namespace:HebrewBooks.Diagnostics.Ui;assembly=HebrewBooks.Diagnostics.Ui" xmlns:views="clr-namespace:HebrewBooks.UI.Views" FlowDirection="{m:LangFlow}">
+  <diag:DiagnosticsView Name="View" />
+</Page>

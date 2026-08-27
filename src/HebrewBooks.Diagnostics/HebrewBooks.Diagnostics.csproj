@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>HebrewBooks.Diagnostics</RootNamespace>
+    <AssemblyName>HebrewBooks.Diagnostics</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="dtSearchNetApi4">
+      <HintPath>..\..\lib\dtSearchNetApi4.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HebrewBooks.Core\HebrewBooks.Core.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Data\HebrewBooks.Data.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Infrastructure\HebrewBooks.Infrastructure.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Search\HebrewBooks.Search.csproj" />
+    <ProjectReference Include="..\HebrewBooks.Services\HebrewBooks.Services.csproj" />
+  </ItemGroup>
+</Project>

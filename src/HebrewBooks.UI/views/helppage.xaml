@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page x:Class="HebrewBooks.UI.Views.HelpPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:res="clr-namespace:HebrewBooks.UI.Resources" xmlns:m="clr-namespace:HebrewBooks.UI.Markup" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="False" Title="HelpPage" xmlns:views="clr-namespace:HebrewBooks.UI.Views" FlowDirection="{m:LangFlow}">
+  <FrameworkElement.Resources>
+    <ResourceDictionary>
+      <Style x:Key="H1" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Margin" Value="0,0,0,12" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+      </Style>
+      <Style x:Key="H2" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Margin" Value="0,0,0,8" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+      </Style>
+      <Style x:Key="P" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextBlock.LineHeight" Value="22" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="0,0,0,8" />
+      </Style>
+    </ResourceDictionary>
+  </FrameworkElement.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="#33888888">
+      <StackPanel Margin="32,20,32,12" MaxWidth="900" HorizontalAlignment="Center">
+        <Grid Margin="0,0,0,8">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+          <TextBlock Grid.Column="0" Text="{x:Static res:SharedStrings.HelpTitle}" Style="{StaticResource H1}" VerticalAlignment="Center" Margin="0" />
+          <ui:Button Grid.Column="1" VerticalAlignment="Center" Content="{x:Static res:SharedStrings.S73}" Command="{Binding SendDiagnosticsReportCommand}" Visibility="{m:HideInProtectMode}" />
+        </Grid>
+        <TextBlock Text="{x:Static res:SharedStrings.S74}" Style="{StaticResource H2}" Margin="0,0,0,6" />
+        <TextBlock Style="{StaticResource P}" TextWrapping="Wrap" Margin="0">
+          <Hyperlink Tag="SecAbout" Click="OnTocClick">
+            <Run Text="{x:Static res:SharedStrings.S75}" />
+          </Hyperlink> · <Hyperlink Tag="SecNew" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S76}" /></Hyperlink> · <Hyperlink Tag="SecHealth" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S77}" /></Hyperlink> · <Hyperlink Tag="SecLayout" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S78}" /></Hyperlink> · <Hyperlink Tag="SecUnifiedSearch" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S79}" /></Hyperlink> · <Hyperlink Tag="SecGuide" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S80}" /></Hyperlink> · <Hyperlink Tag="SecAdvanced" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S81}" /></Hyperlink> · <Hyperlink Tag="SecKeys" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S82}" /></Hyperlink> · <Hyperlink Tag="SecMore" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S83}" /></Hyperlink> · <Hyperlink Tag="SecOcr" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S84}" /></Hyperlink> · <Hyperlink Tag="SecThemes" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S85}" /></Hyperlink> · <Hyperlink Tag="SecNetwork" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S86}" /></Hyperlink> · <Hyperlink Tag="SecBug" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S87}" /></Hyperlink> · <Hyperlink Tag="SecContact" Click="OnTocClick"><Run Text="{x:Static res:SharedStrings.S88}" /></Hyperlink></TextBlock>
+      </StackPanel>
+    </Border>
+    <ScrollViewer Name="ContentScroller" Grid.Row="1" VerticalScrollBarVisibility="Auto" PreviewMouseWheel="OnHelpWheel">
+      <StackPanel Margin="32,16,32,24" MaxWidth="900" HorizontalAlignment="Center">
+        <ui:Card Name="SecAbout" Margin="0,0,0,16" Padding="20">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S75}" Style="{StaticResource H2}" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9009}" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9010}" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9011}" />
+            <TextBlock Style="{StaticResource P}" FontStyle="Italic" Text="{x:Static res:SharedStrings.S9012}" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9013}" />
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecNew" Margin="0,0,0,16" Padding="20">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S89}" Style="{StaticResource H2}" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9014}" />
+            <TextBlock Style="{StaticResource P}">• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S90}" /> <Run Text="{x:Static res:SharedStrings.S9092}" /><LineBreak />• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S91}" /> <Run Text="{x:Static res:SharedStrings.S9093}" /><LineBreak />• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S92}" /> <Run Text="{x:Static res:SharedStrings.S9094}" /><LineBreak />• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S93}" /> <Run Text="{x:Static res:SharedStrings.S9095}" /><LineBreak />• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S85}" /> <Run Text="{x:Static res:SharedStrings.S94}" /><LineBreak />• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S95}" /> <Run Text="{x:Static res:SharedStrings.S9096}" /></TextBlock>
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecHealth" Margin="0,0,0,16" Padding="20" Visibility="{m:HideInProtectMode}">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S96}" Style="{StaticResource H2}" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9015}" />
+            <ui:Button Content="{x:Static res:SharedStrings.S97}" Appearance="Primary" Margin="0,4,0,0" Click="OnOpenDiagnostics" />
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecLayout" Margin="0,0,0,16" Padding="20">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S98}" Style="{StaticResource H2}" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9097}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S99}" /> <Run Text="{x:Static res:SharedStrings.S9098}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S100}" /> תחת "{x:Static res:SharedStrings.S384}" → "פריסת חיפוש" בוחרים בין:</TextBlock>
+            <TextBlock Style="{StaticResource P}">• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S101}" /> <Run Text="{x:Static res:SharedStrings.S102}" /><LineBreak />• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S103}" /> — לשונית "ספרייה" ולשונית "{x:Static res:SharedStrings.S411}" נפרדות, כמו בגרסה הישנה.</TextBlock>
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9016}" />
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecUnifiedSearch" Margin="0,0,0,16" Padding="20">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S79}" Style="{StaticResource H2}" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9017}" />
+            <TextBlock Style="{StaticResource P}">• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S104}" /> <Run Text="{x:Static res:SharedStrings.S9099}" /><LineBreak />• <Run FontWeight="SemiBold">Enter</Run> <Run Text="{x:Static res:SharedStrings.S9100}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S105}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9101}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S106}" /><Run Text="{x:Static res:SharedStrings.S9102}" /> <Run FontWeight="SemiBold" FontFamily="Consolas">:</Run><Run Text="{x:Static res:SharedStrings.S9103}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S107}" />.</TextBlock>
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9104}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S108}" /> <Run Text="{x:Static res:SharedStrings.S9105}" /><LineBreak /><Run Text="{x:Static res:SharedStrings.S9104}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S109}" /> <Run Text="{x:Static res:SharedStrings.S9106}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S110}" />.</TextBlock>
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9018}" />
+            <TextBlock Text="{x:Static res:SharedStrings.S111}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9107}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9019}" /> <Run Text="{x:Static res:SharedStrings.S112}" /> <Run FontFamily="Consolas">Enter</Run> <Run Text="{x:Static res:SharedStrings.S9108}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9109}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9020}" /> <Run Text="{x:Static res:SharedStrings.S9110}" /> <Run FontWeight="SemiBold">✕</Run>.</TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S113}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9111}" /> <Run FontWeight="SemiBold">"{x:Static res:SharedStrings.S24}"</Run> <Run Text="{x:Static res:SharedStrings.S9112}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S115}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9113}" /> <Run FontWeight="SemiBold">"{x:Static res:SharedStrings.S279}"</Run> <Run Text="{x:Static res:SharedStrings.S9114}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S117}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9115}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S118}" /> <Run Text="{x:Static res:SharedStrings.S9116}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S119}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9117}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S120}" /> <Run Text="{x:Static res:SharedStrings.S9118}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S121}" /> אפשרויות החיפוש המתקדמות במקום אחד: הרחבות (אותיות חיבור, שורש, ראשי-תיבות, מספר/גימטריה, כתיב, ארמית), קרבה, טשטוש ועוגני ▶/◀ למילה ראשונה/אחרונה. הפירוט המלא בכרטיס "{x:Static res:SharedStrings.S126}" למטה.</TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S122}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9115}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S123}" /> <Run Text="{x:Static res:SharedStrings.S9119}" /></TextBlock>
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecGuide" Margin="0,0,0,16" Padding="20">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S80}" Style="{StaticResource H2}" />
+            <TextBlock Text="{x:Static res:SharedStrings.S12}" FontWeight="SemiBold" FontSize="14" Margin="0,8,0,4" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9021}" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9120}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9022}" /> <Run Text="{x:Static res:SharedStrings.S9121}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S124}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">בחלון המאוחד — Enter על תיבת החיפוש מריץ חיפוש בתוכן כל הספרים שבאינדקס; במצב הקלאסי — בלשונית "{x:Static res:SharedStrings.S411}". התוצאות מוצגות לפי ספר עם מספר התאמות בכל ספר, ולחיצה פותחת את הספר עם הצגת הסימונים על העמוד הראשון שמכיל את ההיט.</TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S125}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9023}" />
+            <TextBlock Style="{StaticResource P}" FontFamily="Consolas, Cascadia Code, monospace" FontSize="13">
+              <Run Text="{x:Static res:SharedStrings.S9122}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9123}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9124}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9125}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9126}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9127}" />
+            </TextBlock>
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9024}" />
+            <TextBlock Text="{x:Static res:SharedStrings.S92}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9025}" />
+            <TextBlock Text="{x:Static res:SharedStrings.S93}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">בלשונית "הורדת ספרים חדשים" אפשר להוריד ספרים שעדיין לא קיימים בקטלוג. התוכנה תיגש ל-hebrewbooks.org, תוריד את הספרים החסרים, ותוסיף אותם לקטלוג אוטומטית. בסוף ההורדה לוחצים על "{x:Static res:SharedStrings.S29}" כדי שהספרים החדשים יהיו ניתנים לחיפוש.</TextBlock>
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecAdvanced" Margin="0,0,0,16" Padding="20">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S126}" Style="{StaticResource H2}" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9115}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S120}" /> <Run Text="{x:Static res:SharedStrings.S9128}" /> <Run FontFamily="Consolas" Text="{x:Static res:SharedStrings.S127}" /> <Run Text="{x:Static res:SharedStrings.S9129}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S128}" FontWeight="SemiBold" FontSize="14" Margin="0,8,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9130}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9131}" /> <Run FontFamily="Consolas" Text="{x:Static res:SharedStrings.S129}" /> <Run Text="{x:Static res:SharedStrings.S9132}" /><Run FontFamily="Consolas" Text="{x:Static res:SharedStrings.S127}" /> <Run Text="{x:Static res:SharedStrings.S9133}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S130}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9134}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9131}" /> <Run FontFamily="Consolas" Text="{x:Static res:SharedStrings.S131}" /> <Run Text="{x:Static res:SharedStrings.S9135}" /><Run FontFamily="Consolas" Text="{x:Static res:SharedStrings.S129}" /> <Run Text="{x:Static res:SharedStrings.S9136}" /><Run FontFamily="Consolas" Text="{x:Static res:SharedStrings.S127}" /> <Run Text="{x:Static res:SharedStrings.S9137}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S132}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9026}" />
+            <TextBlock Text="{x:Static res:SharedStrings.S133}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9027}" />
+            <TextBlock Text="{x:Static res:SharedStrings.S134}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9028}" />
+            <TextBlock Text="{x:Static res:SharedStrings.S135}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9029}" />
+            <TextBlock Text="{x:Static res:SharedStrings.S136}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9138}" /> <Run FontFamily="Consolas">App\HebAram.DB</Run> <Run Text="{x:Static res:SharedStrings.S9139}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S137}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9030}" />
+            <TextBlock Text="{x:Static res:SharedStrings.S138}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9140}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S139}" /> <Run Text="{x:Static res:SharedStrings.S9141}" /> <Run FontWeight="SemiBold">"{x:Static res:SharedStrings.S138}"</Run> <Run Text="{x:Static res:SharedStrings.S9142}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S141}" /> <Run Text="{x:Static res:SharedStrings.S9143}" /><Run FontFamily="Consolas">pre/N</Run> <Run Text="{x:Static res:SharedStrings.S9144}" /> <Run FontFamily="Consolas">w/N</Run><Run Text="{x:Static res:SharedStrings.S142}" /><Run FontFamily="Consolas">"…"</Run><Run Text="{x:Static res:SharedStrings.S9145}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S143}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9031}" />
+            <TextBlock Text="{x:Static res:SharedStrings.S144}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9146}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S145}" /> <Run Text="{x:Static res:SharedStrings.S9147}" /> <Run FontWeight="SemiBold" FontSize="16">▶</Run> <Run Text="{x:Static res:SharedStrings.S9148}" /><Run FontWeight="SemiBold" FontSize="16">◀</Run> <Run Text="{x:Static res:SharedStrings.S9149}" /><Run FontFamily="Consolas">xfirstword</Run> <Run Text="{x:Static res:SharedStrings.S9150}" /> <Run FontFamily="Consolas">xlastword</Run> <Run Text="{x:Static res:SharedStrings.S9151}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9152}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S146}" /> <Run Text="{x:Static res:SharedStrings.S9153}" /><Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S147}" /><Run Text="{x:Static res:SharedStrings.S9154}" /> <Run FontFamily="Consolas" Text="{x:Static res:SharedStrings.S148}" /> <Run Text="{x:Static res:SharedStrings.S9155}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S149}" /> <Run Text="{x:Static res:SharedStrings.S9156}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}" FontFamily="Consolas, Cascadia Code, monospace" FontSize="13">
+              <Run Text="{x:Static res:SharedStrings.S9157}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9158}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9159}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9160}" />
+            </TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S150}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}" FontFamily="Consolas, Cascadia Code, monospace" FontSize="13">
+              <Run Text="{x:Static res:SharedStrings.S9161}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9162}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9163}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9164}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9165}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9166}" />
+              <LineBreak />
+              <Run Text="{x:Static res:SharedStrings.S9167}" />
+            </TextBlock>
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecKeys" Margin="0,0,0,16" Padding="20">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S82}" Style="{StaticResource H2}" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9168}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9032}" /> <Run Text="{x:Static res:SharedStrings.S9169}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}" FontFamily="Consolas, Cascadia Code, monospace" FontSize="13">
+              <Run Text="{x:Static res:SharedStrings.S9170}" /> <Run FontFamily="Segoe UI" FontSize="12" Text="{x:Static res:SharedStrings.S151}" /><LineBreak /><Run Text="{x:Static res:SharedStrings.S9171}" /> <Run FontFamily="Segoe UI" FontSize="12" Text="{x:Static res:SharedStrings.S151}" /><LineBreak /><Run Text="{x:Static res:SharedStrings.S9172}" /><LineBreak /><Run Text="{x:Static res:SharedStrings.S9173}" /><LineBreak /><Run Text="{x:Static res:SharedStrings.S9174}" /><LineBreak /><Run Text="{x:Static res:SharedStrings.S9175}" /><LineBreak /><Run Text="{x:Static res:SharedStrings.S9176}" /><LineBreak /><Run Text="{x:Static res:SharedStrings.S9177}" /><LineBreak />Alt+C — מעבר ללשונית "{x:Static res:SharedStrings.S411}" (חיפוש בתוכן)<LineBreak /><Run Text="{x:Static res:SharedStrings.S9178}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9179}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S152}" /> <Run Text="{x:Static res:SharedStrings.S9180}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S153}" /> <Run Text="{x:Static res:SharedStrings.S9181}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9182}" /> <Run FontFamily="Consolas">F</Run> <Run Text="{x:Static res:SharedStrings.S154}" /><Run FontFamily="Consolas">/</Run> <Run Text="{x:Static res:SharedStrings.S9183}" /></TextBlock>
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecMore" Margin="0,0,0,16" Padding="20">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S83}" Style="{StaticResource H2}" />
+            <TextBlock Text="{x:Static res:SharedStrings.S155}" FontWeight="SemiBold" FontSize="14" Margin="0,8,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9184}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S156}" /> <Run Text="{x:Static res:SharedStrings.S9185}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S157}" /> <Run Text="{x:Static res:SharedStrings.S9186}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S158}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9187}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S159}" /> <Run Text="{x:Static res:SharedStrings.S9188}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S160}" /><Run Text="{x:Static res:SharedStrings.S9189}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9190}" />
+              <LineBreak />• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S161}" /> <Run Text="{x:Static res:SharedStrings.S162}" /><LineBreak /><Run Text="{x:Static res:SharedStrings.S9191}" /> <Run FontWeight="SemiBold">‹ ›</Run> <Run Text="{x:Static res:SharedStrings.S9192}" /><LineBreak /><Run Text="{x:Static res:SharedStrings.S9193}" /> <Run FontWeight="SemiBold">"{x:Static res:SharedStrings.S336}"</Run> <Run Text="{x:Static res:SharedStrings.S9194}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9195}" />
+              <Run FontWeight="SemiBold">הגדרות → מראה → "{x:Static res:SharedStrings.S394}"</Run> (הניווט עדיין זמין אז דרך החצים ◀▶ והרשימה "{x:Static res:SharedStrings.S336}").</TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S164}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9196}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S165}" /> <Run Text="{x:Static res:SharedStrings.S9197}" /><Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S166}" /> <Run Text="{x:Static res:SharedStrings.S9150}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S167}" /> — חוסך זמן ומונע תוצאות מיותרות. בקטלוג מסמנים ספרים בעמודת הסימון, עם "בחר הכל" / "{x:Static res:SharedStrings.S8}" / איפוס.</TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S168}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9198}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S169}" /> <Run Text="{x:Static res:SharedStrings.S9199}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S170}" /> <Run Text="{x:Static res:SharedStrings.S9200}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S171}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run FontFamily="Consolas">F11</Run> <Run Text="{x:Static res:SharedStrings.S9201}" /> <Run FontFamily="Consolas">Esc</Run> <Run Text="{x:Static res:SharedStrings.S9150}" /> <Run FontFamily="Consolas">F11</Run> <Run Text="{x:Static res:SharedStrings.S9202}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S172}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run FontFamily="Consolas">F9</Run> <Run Text="{x:Static res:SharedStrings.S9203}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S173}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9204}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S174}" /><Run Text="{x:Static res:SharedStrings.S9205}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S175}" /> <Run Text="{x:Static res:SharedStrings.S9206}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9207}" />
+              <Run FontWeight="SemiBold">DPI</Run> <Run Text="{x:Static res:SharedStrings.S9208}" /> <Run FontWeight="SemiBold">200 DPI</Run> <Run Text="{x:Static res:SharedStrings.S9209}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S100}" /> תחת "{x:Static res:SharedStrings.S384}" → <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S176}" />:<LineBreak />• <Run FontWeight="SemiBold">100–150</Run> <Run Text="{x:Static res:SharedStrings.S9210}" /><LineBreak />• <Run FontWeight="SemiBold">200</Run> <Run Text="{x:Static res:SharedStrings.S9211}" /><LineBreak />• <Run FontWeight="SemiBold">300</Run> <Run Text="{x:Static res:SharedStrings.S9212}" /><LineBreak />• <Run FontWeight="SemiBold">400–600</Run> <Run Text="{x:Static res:SharedStrings.S9213}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S177}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S178}" /> <Run Text="{x:Static res:SharedStrings.S9214}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S179}" /> <Run Text="{x:Static res:SharedStrings.S9215}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S180}" /> <Run Text="{x:Static res:SharedStrings.S9216}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S118}" /> <Run Text="{x:Static res:SharedStrings.S9217}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S181}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9218}" /> <Run FontWeight="SemiBold">ברירת המחדל היא "{x:Static res:SharedStrings.S336}"</Run><Run Text="{x:Static res:SharedStrings.S182}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9033}" /> <Run Text="{x:Static res:SharedStrings.S9219}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S183}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9220}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S184}" /> <Run Text="{x:Static res:SharedStrings.S9221}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}">• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S185}" /> <Run Text="{x:Static res:SharedStrings.S9222}" /> <Run FontFamily="Consolas">Ctrl+</Run><Run Text="{x:Static res:SharedStrings.S9223}" /><LineBreak />• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S186}" /> <Run Text="{x:Static res:SharedStrings.S9224}" /><Run FontStyle="Italic" Text="{x:Static res:SharedStrings.S187}" />", "<Run FontStyle="Italic" Text="{x:Static res:SharedStrings.S188}" /><Run Text="{x:Static res:SharedStrings.S9225}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9034}" /> <Run Text="{x:Static res:SharedStrings.S9226}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9227}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S189}" /> <Run Text="{x:Static res:SharedStrings.S9228}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S190}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9229}" /> <Run FontWeight="SemiBold">"📌"</Run> <Run Text="{x:Static res:SharedStrings.S9230}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S191}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9231}" /> <Run FontWeight="SemiBold">★</Run> בסרגל הספר מוסיף/מסיר אותו מהמועדפים. הפריט "{x:Static res:SharedStrings.S319}" בסרגל הניווט הימני מתרחב במקום (לא חלון נפרד) ומציג את כל הספרים השמורים. לחיצה על "✚ צור תיקייה" יוצרת תיקייה חדשה; ניתן <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S192}" /> ספר אל תיקייה כדי להעביר אותו, או אל הפריט "{x:Static res:SharedStrings.S319}" עצמו כדי להוציא אותו לרמה העליונה. קליק ימני על תיקייה → "{x:Static res:SharedStrings.S16}"; קליק ימני על ספר → פתח / העבר לתיקייה / הסר.</TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S193}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9232}" /> <Run FontWeight="SemiBold">‹ / ›</Run> <Run Text="{x:Static res:SharedStrings.S9233}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S194}" /> <Run Text="{x:Static res:SharedStrings.S9234}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}">
+              <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S195}" />: <Run FontFamily="Consolas">Ctrl+[</Run> <Run Text="{x:Static res:SharedStrings.S9235}" /> <Run FontFamily="Consolas">Ctrl+]</Run> <Run Text="{x:Static res:SharedStrings.S9236}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S196}" /> <Run Text="{x:Static res:SharedStrings.S9237}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S197}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9238}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S198}" /> <Run Text="{x:Static res:SharedStrings.S9239}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S199}" /> <Run Text="{x:Static res:SharedStrings.S9240}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S200}" /> <Run Text="{x:Static res:SharedStrings.S9241}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S201}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9242}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9035}" />, <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S202}" /> <Run Text="{x:Static res:SharedStrings.S9243}" /><Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9036}" /><Run Text="{x:Static res:SharedStrings.S9244}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9245}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9037}" /> <Run Text="{x:Static res:SharedStrings.S203}" /><Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S204}" /> <Run Text="{x:Static res:SharedStrings.S9246}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9038}" />.</TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S205}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" Visibility="{m:HideInProtectMode}" />
+            <TextBlock Style="{StaticResource P}" Visibility="{m:HideInProtectMode}">
+              <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S206}" /> <Run Text="{x:Static res:SharedStrings.S9247}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S207}" /><Run Text="{x:Static res:SharedStrings.S9248}" /> <Run FontWeight="SemiBold">V</Run> <Run Text="{x:Static res:SharedStrings.S9249}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S208}" /> <Run Text="{x:Static res:SharedStrings.S9250}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}" Visibility="{m:HideInProtectMode}">
+              <Run Text="{x:Static res:SharedStrings.S9251}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S209}" /> <Run Text="{x:Static res:SharedStrings.S9252}" /><Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S11}" /><Run Text="{x:Static res:SharedStrings.S210}" /><Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S12}" /> <Run Text="{x:Static res:SharedStrings.S13}" /><Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S14}" /> <Run Text="{x:Static res:SharedStrings.S9253}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S211}" /> <Run Text="{x:Static res:SharedStrings.S9254}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S212}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9255}" />
+              <LineBreak />
+              <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S212}" /> <Run Text="{x:Static res:SharedStrings.S9256}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S213}" /><Run Text="{x:Static res:SharedStrings.S9257}" /><LineBreak /><Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S214}" /> <Run Text="{x:Static res:SharedStrings.S9258}" /><LineBreak /><Run Text="{x:Static res:SharedStrings.S9259}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9039}" /><Run Text="{x:Static res:SharedStrings.S9260}" /></TextBlock>
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecOcr" Margin="0,0,0,16" Padding="20">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S84}" Style="{StaticResource H2}" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9261}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9040}" /> <Run Text="{x:Static res:SharedStrings.S9262}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9041}" /> <Run Text="{x:Static res:SharedStrings.S9263}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S215}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S206}" /> <Run Text="{x:Static res:SharedStrings.S9264}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S216}" /><Run Text="{x:Static res:SharedStrings.S9265}" /> <Run FontWeight="SemiBold">hebrewbooks</Run> <Run Text="{x:Static res:SharedStrings.S9266}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S217}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9267}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S218}" /> <Run Text="{x:Static res:SharedStrings.S9268}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S219}" /><Run Text="{x:Static res:SharedStrings.S9269}" /><LineBreak /><Run Text="{x:Static res:SharedStrings.S9270}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S220}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9271}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9042}" /> <Run Text="{x:Static res:SharedStrings.S9272}" /></TextBlock>
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecThemes" Margin="0,0,0,16" Padding="20">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S85}" Style="{StaticResource H2}" />
+            <TextBlock Style="{StaticResource P}">בלשונית "הגדרות" תחת "{x:Static res:SharedStrings.S384}" אפשר לבחור מצב צבעים: לפי מערכת ההפעלה (ברירת מחדל), בהיר או כהה. השינוי מיידי ונשמר בין הפעלות.</TextBlock>
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecNetwork" Margin="0,0,0,16" Padding="20">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S221}" Style="{StaticResource H2}" />
+            <TextBlock Style="{StaticResource P}">להתקנה במספר עמדות (למשל בית כנסת, בית מדרש או ספרייה) אין צורך להעתיק את כל הספרייה לכל מחשב. מחזיקים את הספרים, האינדקס והקטלוג פעם אחת על שרת מרכזי, וכל עמדה ניגשת אליהם דרך הרשת. מדריך מפורט למנהלי מערכת מופיע באתר ובפורום ("{x:Static res:SharedStrings.S437}"); להלן עיקרי הדברים.</TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S222}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S223}" /> <Run Text="{x:Static res:SharedStrings.S9273}" /><LineBreak />• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S224}" /> <Run Text="{x:Static res:SharedStrings.S9274}" /><LineBreak />• <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S225}" /> <Run Text="{x:Static res:SharedStrings.S9275}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S226}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9276}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S227}" /><Run Text="{x:Static res:SharedStrings.S9277}" /> <Run FontFamily="Consolas">http://192.168.1.20:8080</Run><Run Text="{x:Static res:SharedStrings.S9278}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S228}" /> <Run Text="{x:Static res:SharedStrings.S9279}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S229}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9280}" /> <Run FontWeight="SemiBold">הגדרות ← "{x:Static res:SharedStrings.S437}"</Run> <Run Text="{x:Static res:SharedStrings.S9281}" /> <Run FontWeight="SemiBold">"{x:Static res:SharedStrings.S439}"</Run><Run Text="{x:Static res:SharedStrings.S9282}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S232}" /> + <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S233}" /> <Run Text="{x:Static res:SharedStrings.S203}" /><Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S234}" /> <Run Text="{x:Static res:SharedStrings.S9283}" /> <Run FontFamily="Consolas">\\server\HebrewBooks</Run><Run Text="{x:Static res:SharedStrings.S9284}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9043}" /> <Run Text="{x:Static res:SharedStrings.S9285}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S235}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9286}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S9044}" /> <Run Text="{x:Static res:SharedStrings.S9287}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S236}" />.</TextBlock>
+            <TextBlock Style="{StaticResource P}">
+              <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S237}" /> <Run Text="{x:Static res:SharedStrings.S9288}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S238}" /> <Run Text="{x:Static res:SharedStrings.S9289}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S239}" /> <Run Text="{x:Static res:SharedStrings.S9290}" /></TextBlock>
+            <TextBlock Text="{x:Static res:SharedStrings.S240}" FontWeight="SemiBold" FontSize="14" Margin="0,12,0,4" />
+            <TextBlock Style="{StaticResource P}">
+              <Run Text="{x:Static res:SharedStrings.S9291}" /> <Run FontWeight="SemiBold" Text="{x:Static res:SharedStrings.S241}" /><Run Text="{x:Static res:SharedStrings.S9292}" /></TextBlock>
+            <TextBlock Style="{StaticResource P}" FontStyle="Italic" Margin="0,8,0,0" Text="{x:Static res:SharedStrings.S9045}" />
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecBug" Margin="0,0,0,16" Padding="20" Visibility="{m:HideInProtectMode}">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S87}" Style="{StaticResource H2}" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9046}" />
+            <ui:Button Content="{x:Static res:SharedStrings.S242}" MinWidth="220" Margin="0,12,0,0" Command="{Binding SendDiagnosticsReportCommand}" />
+          </StackPanel>
+        </ui:Card>
+        <ui:Card Name="SecContact" Margin="0,0,0,16" Padding="20" Visibility="{m:HideInProtectMode}">
+          <StackPanel>
+            <TextBlock Text="{x:Static res:SharedStrings.S88}" Style="{StaticResource H2}" />
+            <TextBlock Style="{StaticResource P}" Text="{x:Static res:SharedStrings.S9047}" />
+            <TextBlock Margin="0,8,0,0">
+              <Hyperlink NavigateUri="mailto:HebrewBooks2026@gmail.com" FontSize="16" FontWeight="SemiBold" RequestNavigate="OnContactEmailClick">HebrewBooks2026@gmail.com</Hyperlink>
+            </TextBlock>
+          </StackPanel>
+        </ui:Card>
+        <TextBlock Text="© 2026 The Society for Preservation of Hebrew Books" Opacity="0.55" FontSize="12" HorizontalAlignment="Center" Margin="0,8,0,16" />
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</Page>

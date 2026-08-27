@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>HebrewBooks.Search</RootNamespace>
+    <AssemblyName>HebrewBooks.Search</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="dtSearchNetApi4">
+      <HintPath>..\..\lib\dtSearchNetApi4.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HebrewBooks.Core\HebrewBooks.Core.csproj" />
+  </ItemGroup>
+</Project>

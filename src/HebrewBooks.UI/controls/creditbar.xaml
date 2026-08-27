@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="HebrewBooks.UI.Controls.CreditBar" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:res="clr-namespace:HebrewBooks.UI.Resources" xmlns:m="clr-namespace:HebrewBooks.UI.Markup" xmlns:controls="clr-namespace:HebrewBooks.UI.Controls" FlowDirection="{m:LangFlow}">
+  <TextBlock Margin="12,4" TextAlignment="Center" TextTrimming="CharacterEllipsis" FontSize="14" FontWeight="Bold" Opacity="0.85" VerticalAlignment="Center">
+    <Run Text="{x:Static res:SharedStrings.S9001}" />
+    <Run Text="{x:Static res:SharedStrings.S9002}" />
+    <Run Text="{x:Static res:SharedStrings.S9003}" />
+    <Hyperlink Name="EmailLink" NavigateUri="mailto:HebrewBooks2026@gmail.com" FontFamily="Consolas, Cascadia Code, monospace" TextDecorations="Underline" Foreground="#FFCAA24A" ToolTip="{x:Static res:SharedStrings.S3}" RequestNavigate="OnEmailClick">HebrewBooks2026@gmail.com</Hyperlink>
+  </TextBlock>
+</UserControl>
